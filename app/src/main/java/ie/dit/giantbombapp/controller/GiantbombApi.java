@@ -2,8 +2,8 @@ package ie.dit.giantbombapp.controller;
 
 import java.util.List;
 
-import ie.dit.giantbombapp.model.PromoResponse;
-import ie.dit.giantbombapp.model.Result;
+import ie.dit.giantbombapp.model.pojos.PromoResponse;
+import ie.dit.giantbombapp.model.pojos.Result;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -13,7 +13,7 @@ import retrofit2.http.Query;
  * Created by Graham on 14-Nov-16.
  */
 
-public interface GiantbombApi {
+interface GiantbombApi {
 
     @GET("promos/")
     Call<List<Result>> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);
