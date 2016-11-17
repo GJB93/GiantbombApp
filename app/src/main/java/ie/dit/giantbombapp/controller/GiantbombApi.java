@@ -13,7 +13,7 @@ import retrofit2.http.Query;
  * Created by Graham on 14-Nov-16.
  */
 
-interface GiantbombApi {
+public interface GiantbombApi {
 
     @GET("promos/")
     Call<List<Result>> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);

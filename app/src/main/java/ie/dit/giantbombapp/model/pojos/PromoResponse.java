@@ -11,7 +11,7 @@ public class PromoResponse {
     private int numberOfPageResults;
     private int numberOfTotalResults;
     private int statusCode;
-    private Promo promo;
+    private Results results;
     private int version;
 
     public String getError() {
@@ -62,12 +62,12 @@ public class PromoResponse {
         this.statusCode = statusCode;
     }
 
-    public Promo getPromo() {
-        return promo;
+    public Results getResults() {
+        return results;
     }
 
-    public void setPromo(Promo promo) {
-        this.promo = promo;
+    public void setResults(Results results) {
+        this.results = results;
     }
 
     public int getVersion() {
@@ -76,5 +76,11 @@ public class PromoResponse {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String toString()
+    {
+        return getError() + " " + getLimit() + " " + getNumberOfPageResults() + " " +
+                getNumberOfTotalResults() + " " + getResults().toString() + " " + Integer.toString(getVersion());
     }
 }

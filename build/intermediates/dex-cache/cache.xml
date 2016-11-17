@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="c46aafa514dbdb5bbf8026cc7c6ff62993552c4d">
+        sha1="a5ba9d546d0e33f7a6e34d54d1294042c60e5c84">
         <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_2bbb37e2a8fb50d50d4414af59ff2a33f6bee9bc\classes.dex" />
     </item>
     <item
@@ -124,7 +124,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="d6c6145f9a8da7d9fdc55cb5b75aab9001ce6b9a">
+        sha1="99be3cb3fc1dc6e7879bef4076f8ccf8180514a9">
         <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_48364c494268c65c1df1056782a637397f1e220a\classes.dex" />
     </item>
     <item
