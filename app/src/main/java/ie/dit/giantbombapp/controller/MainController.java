@@ -5,11 +5,13 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.util.Log;
 
-import ie.dit.giantbombapp.R;
-import ie.dit.giantbombapp.model.database.DatabaseManager;
-import ie.dit.giantbombapp.model.pojos.Results;
-import ie.dit.giantbombapp.model.pojos.PromoResponse;
+import java.util.List;
 
+import ie.dit.giantbombapp.controller.api.ApiManager;
+import ie.dit.giantbombapp.model.database.DatabaseManager;
+import ie.dit.giantbombapp.model.pojos.PromoResult;
+
+import ie.dit.giantbombapp.model.pojos.PromoResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,15 +23,15 @@ import retrofit2.Response;
 public class MainController
 {
     private static final String TAG = "MainController";
-    private Resources res = Resources.getSystem();
+    private Resources resources = Resources.getSystem();
     private ApiManager mApi = new ApiManager();
     private DatabaseManager db;
     private Context ctx;
-    PromoResponse promoResponse;
 
     public MainController(Context ctx)
     {
         this.ctx = ctx;
+        resources = Resources.getSystem();
         db = new DatabaseManager(ctx);
         db.open();
     }
@@ -37,43 +39,76 @@ public class MainController
     public Cursor fetchPromo(int id)
     {
         Cursor cursor = null;
-        try {
-            cursor = db.getPromoByPromoId(id);
-            Log.d(TAG, "Cursor retrieved successfully");
-        }
-        catch (NullPointerException e)
-        {
-            Log.d(TAG, "Null pointer exception when getting cursor");
-        }
 
-        if(cursor == null) {
-            Call<PromoResponse> call = mApi.getApi().getPromo(id, res.getString(R.string.api_key), res.getString(R.string.format));
-            call.enqueue(new Callback<PromoResponse>() {
-                @Override
-                public void onResponse(Call<PromoResponse> call, Response<PromoResponse> response) {
-                    int statusCode = response.code();
-                    PromoResponse promoResponse = response.body();
-                    Results results = promoResponse.getResults();
-                    long dbInsert = db.insertPromo(results.getDateAdded(), results.getDeck(), results.getId(), results.getName(),
-                            results.getResourceType(), results.getUser());
 
-                    if(dbInsert < 0)
+        Call<PromoResult> call = mApi.getApi().getPromo(id, "8481d27bba6dbd03cb21734fea664a72d6436747", "json");
+        call.enqueue(new Callback<PromoResult>() {
+            @Override
+            public void onResponse(Call<PromoResult> call, Response<PromoResult> response) {
+                //int statusCode = response.code();
+                PromoResult promoResult = response.body();
+                long dbInsert = db.insertPromo(promoResult.getDateAdded(), promoResult.getApiDetailUrl(), promoResult.getDeck(),
+                        promoResult.getId(), promoResult.getLink(), promoResult.getName(), promoResult.getResourceType(), promoResult.getUser());
+
+                if(dbInsert < 0)
+                {
+                    Log.d(TAG, "There was an error when inserting the data into the database");
+                }
+                else
+                {
+                    Log.d(TAG, "The data was entered into the database");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PromoResult> call, Throwable t) {
+                Log.d(TAG, t.getMessage());
+            }
+        });
+        cursor = db.getPromoByPromoId(id);
+
+
+        return cursor;
+    }
+
+    public Cursor fetchAllPromos()
+    {
+        Cursor cursor = null;
+        Call<List<PromoResult>> call = mApi.getApi().getAllPromos("8481d27bba6dbd03cb21734fea664a72d6436747", "json");
+        call.enqueue(new Callback<List<PromoResult>>() {
+            @Override
+            public void onResponse(Call<List<PromoResult>> call, Response<List<PromoResult>> response) {
+                Log.d(TAG, "Response was successful");
+                //int statusCode = response.code();
+                List<PromoResult> results;
+                results = response.body();
+
+                Log.d(TAG, results.toString());
+
+                for(PromoResult result:results)
+                {
+
+                    long dbInsert = db.insertPromo(result.getDateAdded(), result.getApiDetailUrl(), result.getDeck(),
+                            result.getId(), result.getLink(), result.getName(), result.getResourceType(), result.getUser());
+
+                    if (dbInsert < 0)
                     {
                         Log.d(TAG, "There was an error when inserting the data into the database");
-                    }
-                    else
+                    } else
                     {
                         Log.d(TAG, "The data was entered into the database");
                     }
                 }
 
-                @Override
-                public void onFailure(Call<PromoResponse> call, Throwable t) {
-                    Log.d(TAG, t.getMessage());
-                }
-            });
-            db.getPromoByPromoId(id);
-        }
+            }
+
+            @Override
+            public void onFailure(Call<List<PromoResult>> call, Throwable t) {
+                Log.d(TAG, t.getMessage());
+            }
+        });
+        cursor = db.getAllPromos();
+
 
         return cursor;
     }

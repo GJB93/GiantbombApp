@@ -15,18 +15,22 @@ public class DatabaseManager {
 
     private static final String PROMO_TABLE 	    = "Promo";
     private static final String PROMO_ROWID 	    = "_id";
+    private static final String PROMO_APIURL        = "api_url";
     private static final String PROMO_DATEADDED 	= "date_added";
     private static final String PROMO_DECK 	        = "deck";
     private static final String PROMO_PROMOID	    = "promo_id";
+    private static final String PROMO_SITELINK      = "site_link";
     private static final String PROMO_PROMONAME     = "promo_name";
     private static final String PROMO_RESTYPE       = "resource_type";
     private static final String PROMO_AUTHOR        = "author";
     private static final String PROMO_CREATE =
             "create table " + PROMO_TABLE + " (" +
                     PROMO_ROWID + " integer primary key autoincrement," +
+                    PROMO_APIURL + " text," +
                     PROMO_DATEADDED + " text," +
                     PROMO_DECK + " text," +
                     PROMO_PROMOID + " integer," +
+                    PROMO_SITELINK + " text," +
                     PROMO_PROMONAME + " text," +
                     PROMO_RESTYPE + " text," +
                     PROMO_AUTHOR + " text); ";
@@ -54,7 +58,7 @@ public class DatabaseManager {
     private static final String REVIEW_DROP = "drop table review;";
 
     private static final String DATABASE_NAME 	= "Giantbomb";
-    private static final int DATABASE_VERSION 	= 2;
+    private static final int DATABASE_VERSION 	= 3;
     private static final String DATABASE_CREATE =
             PROMO_CREATE + REVIEW_CREATE;
     private final Context context;
@@ -110,12 +114,14 @@ public class DatabaseManager {
         DBHelper.close();
     }
 
-    public long insertPromo(String dateAdded, String deck, int promoId, String promoName, String resType, String author) throws SQLException
+    public long insertPromo(String dateAdded, String apiUrl, String deck, int promoId, String siteLink, String promoName, String resType, String author) throws SQLException
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(PROMO_DATEADDED, dateAdded);
+        initialValues.put(PROMO_APIURL, apiUrl);
         initialValues.put(PROMO_DECK, deck);
         initialValues.put(PROMO_PROMOID, promoId);
+        initialValues.put(PROMO_SITELINK, siteLink);
         initialValues.put(PROMO_PROMONAME, promoName);
         initialValues.put(PROMO_RESTYPE, resType);
         initialValues.put(PROMO_AUTHOR, author);
@@ -149,8 +155,10 @@ public class DatabaseManager {
                 db.query(true, PROMO_TABLE, new String[]
                                 {
                                         PROMO_DATEADDED,
+                                        PROMO_APIURL,
                                         PROMO_DECK,
                                         PROMO_PROMOID,
+                                        PROMO_SITELINK,
                                         PROMO_PROMONAME,
                                         PROMO_RESTYPE,
                                         PROMO_AUTHOR
@@ -170,8 +178,10 @@ public class DatabaseManager {
                 db.query(true, PROMO_TABLE, new String[]
                                 {
                                         PROMO_DATEADDED,
+                                        PROMO_APIURL,
                                         PROMO_DECK,
                                         PROMO_PROMOID,
+                                        PROMO_SITELINK,
                                         PROMO_PROMONAME,
                                         PROMO_RESTYPE,
                                         PROMO_AUTHOR
@@ -186,12 +196,14 @@ public class DatabaseManager {
     }
 
     //
-    public boolean updatePromo(long rowId, String dateAdded, String deck, int promoId, String promoName, String resType, String author) throws SQLException
+    public boolean updatePromo(long rowId, String dateAdded, String apiUrl, String deck, int promoId, String siteLink, String promoName, String resType, String author) throws SQLException
     {
         ContentValues args = new ContentValues();
         args.put(PROMO_DATEADDED, dateAdded);
+        args.put(PROMO_APIURL, apiUrl);
         args.put(PROMO_DECK, deck);
         args.put(PROMO_PROMOID, promoId);
+        args.put(PROMO_SITELINK, siteLink);
         args.put(PROMO_PROMONAME, promoName);
         args.put(PROMO_RESTYPE, resType);
         args.put(PROMO_AUTHOR, author);
