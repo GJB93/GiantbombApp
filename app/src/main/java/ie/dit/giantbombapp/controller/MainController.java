@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import ie.dit.giantbombapp.R;
 import ie.dit.giantbombapp.controller.api.ApiManager;
 import ie.dit.giantbombapp.model.database.DatabaseManager;
 import ie.dit.giantbombapp.model.pojos.PromoResult;
@@ -74,7 +75,7 @@ public class MainController
     public Cursor fetchAllPromos()
     {
         Cursor cursor = null;
-        Call<List<PromoResult>> call = mApi.getApi().getAllPromos("8481d27bba6dbd03cb21734fea664a72d6436747", "json");
+        Call<List<PromoResult>> call = mApi.getApi().getAllPromos(resources.getString(R.string.api_key), resources.getString(R.string.format));
         call.enqueue(new Callback<List<PromoResult>>() {
             @Override
             public void onResponse(Call<List<PromoResult>> call, Response<List<PromoResult>> response) {
