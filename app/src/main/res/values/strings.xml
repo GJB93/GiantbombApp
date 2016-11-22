@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">GiantbombApp</string>
-    <string name="api_key"></string>
+    <string name="api_key">8481d27bba6dbd03cb21734fea664a72d6436747</string>
     <string name="format">json</string>
 </resources>

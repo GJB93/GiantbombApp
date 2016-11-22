@@ -10,6 +10,7 @@ import java.util.List;
 import ie.dit.giantbombapp.R;
 import ie.dit.giantbombapp.controller.api.ApiManager;
 import ie.dit.giantbombapp.model.database.DatabaseManager;
+import ie.dit.giantbombapp.model.pojos.GenericContainer;
 import ie.dit.giantbombapp.model.pojos.PromoResult;
 
 import ie.dit.giantbombapp.model.pojos.ResultsContainer;

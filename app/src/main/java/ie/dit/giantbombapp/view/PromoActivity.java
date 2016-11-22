@@ -23,7 +23,9 @@ public class PromoActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 
         //controller.fetchPromo(12229);
-        //controller.fetchAllPromos();
+        controller.fetchAllPromos();
 
+        //controller.fetchPromoG(12229);
+        //controller.fetchAllPromosG();
     }
 }
