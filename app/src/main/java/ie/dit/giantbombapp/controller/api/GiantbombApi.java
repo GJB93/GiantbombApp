@@ -1,8 +1,7 @@
 package ie.dit.giantbombapp.controller.api;
 
-import ie.dit.giantbombapp.model.pojos.GenericContainer;
-import ie.dit.giantbombapp.model.pojos.PromoResult;
-import ie.dit.giantbombapp.model.pojos.ResultsContainer;
+import ie.dit.giantbombapp.model.pojos.PromosContainer;
+import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,14 +14,14 @@ import retrofit2.http.Query;
 public interface GiantbombApi {
 
     @GET("promos/")
-    Call<ResultsContainer> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);
+    Call<PromosContainer> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);
 
     @GET("promo/{id}/")
-    Call<ResultsContainer> getPromo(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
+    Call<PromosContainer> getPromo(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
 
-    @GET("promos/")
-    Call<GenericContainer<PromoResult>> getAllPromosG(@Query("api_key") String apiKey, @Query("format") String format);
+    @GET("reviews/")
+    Call<ReviewsContainer> getAllReviews(@Query("api_key") String apiKey, @Query("format") String format, @Query("sort") String sort);
 
-    @GET("promo/{id}/")
-    Call<GenericContainer<PromoResult>> getPromoG(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
+    @GET("review/{id}/")
+    Call<ReviewsContainer> getReview(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
 }

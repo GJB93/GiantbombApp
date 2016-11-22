@@ -2,13 +2,9 @@ package ie.dit.giantbombapp.controller.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-
-import ie.dit.giantbombapp.model.pojos.GenericContainer;
-import ie.dit.giantbombapp.model.pojos.PromoResult;
-import ie.dit.giantbombapp.model.pojos.ResultsContainer;
+import ie.dit.giantbombapp.model.pojos.PromosContainer;
+import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,12 +20,10 @@ public class ApiManager {
     {
         if(mApi == null)
         {
-            GenericContainer<PromoResult> promoContainer = new GenericContainer<>();
-            Type promoContainerType = new TypeToken<GenericContainer<PromoResult>>() {}.getType();
-            Type resultContainerType = new TypeToken<ResultsContainer>() {}.getType();
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                    .registerTypeAdapter(resultContainerType, new PromoDeserialiser())
+                    .registerTypeAdapter(PromosContainer.class, new PromoDeserialiser())
+                    .registerTypeAdapter(ReviewsContainer.class, new ReviewDeserialiser())
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()

@@ -7,6 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import ie.dit.giantbombapp.model.pojos.Promo;
+import ie.dit.giantbombapp.model.pojos.Review;
+
 /**
  * Created by Graham on 17-Nov-16.
  */
@@ -38,27 +41,33 @@ public class DatabaseManager {
 
     private static final String REVIEW_TABLE        = "Review";
     private static final String REVIEW_ROWID        = "_id";
+    private static final String REVIEW_APIURL       = "api_url";
     private static final String REVIEW_DECK         = "deck";
     private static final String REVIEW_GAMENAME     = "game_name";
+    private static final String REVIEW_GAMEID       = "game_id";
     private static final String REVIEW_PUBLISHDATE  = "publish_date";
-    private static final String REVIEW_RELEASENAME  = "release_date";
+    private static final String REVIEW_RELEASENAME  = "release_name";
     private static final String REVIEW_AUTHOR       = "author";
     private static final String REVIEW_SCORE        = "score";
+    private static final String REVIEW_SITEURL      = "site_url";
     private static final String REVIEW_PLATFORMS    = "platforms";
     private static final String REVIEW_CREATE =
             "create table " + REVIEW_TABLE + " (" +
                     REVIEW_ROWID + " integer primary key autoincrement," +
+                    REVIEW_APIURL + " text," +
                     REVIEW_DECK + " text," +
                     REVIEW_GAMENAME + " text," +
+                    REVIEW_GAMEID + " integer," +
                     REVIEW_PUBLISHDATE + " text," +
                     REVIEW_RELEASENAME + " text," +
                     REVIEW_AUTHOR + " text," +
                     REVIEW_SCORE + " integer," +
+                    REVIEW_SITEURL + " text," +
                     REVIEW_PLATFORMS + " text);";
     private static final String REVIEW_DROP = "drop table review;";
 
     private static final String DATABASE_NAME 	= "Giantbomb";
-    private static final int DATABASE_VERSION 	= 4;
+    private static final int DATABASE_VERSION 	= 5;
     private static final String DATABASE_CREATE =
             PROMO_CREATE + REVIEW_CREATE;
     private final Context context;
@@ -114,25 +123,30 @@ public class DatabaseManager {
         DBHelper.close();
     }
 
-    public long insertPromo(String dateAdded, String apiUrl, String deck, int promoId, String siteLink, String promoName, String resType, String author) throws SQLException
+    public long insertPromo(Promo promo) throws SQLException
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(PROMO_DATEADDED, dateAdded);
-        initialValues.put(PROMO_APIURL, apiUrl);
-        initialValues.put(PROMO_DECK, deck);
-        initialValues.put(PROMO_PROMOID, promoId);
-        initialValues.put(PROMO_SITELINK, siteLink);
-        initialValues.put(PROMO_PROMONAME, promoName);
-        initialValues.put(PROMO_RESTYPE, resType);
-        initialValues.put(PROMO_AUTHOR, author);
+        initialValues.put(PROMO_DATEADDED, promo.getDateAdded());
+        initialValues.put(PROMO_APIURL, promo.getApiDetailUrl());
+        initialValues.put(PROMO_DECK, promo.getDeck());
+        initialValues.put(PROMO_PROMOID, promo.getId());
+        initialValues.put(PROMO_SITELINK, promo.getLink());
+        initialValues.put(PROMO_PROMONAME, promo.getName());
+        initialValues.put(PROMO_RESTYPE, promo.getResourceType());
+        initialValues.put(PROMO_AUTHOR, promo.getUser());
         return db.insert(PROMO_TABLE, null, initialValues);
     }
 
-    public boolean deletePromo(long rowId) throws SQLException
+    public boolean deletePromoByPromoId(int promoId) throws SQLException
     {
         //
-        return db.delete(PROMO_TABLE, PROMO_ROWID +
-                "=" + rowId, null) > 0;
+        return db.delete(PROMO_TABLE, PROMO_PROMOID +
+                "=" + promoId, null) > 0;
+    }
+
+    public boolean wipePromos()
+    {
+        return db.delete(PROMO_TABLE, "1", null) > 0;
     }
 
     public Cursor getAllPromos() throws SQLException
@@ -147,29 +161,6 @@ public class DatabaseManager {
                                 PROMO_AUTHOR
                         },
                 null, null, null, null, null);
-    }
-
-    public Cursor getPromoByRowId(long rowId) throws SQLException
-    {
-        Cursor mCursor =
-                db.query(true, PROMO_TABLE, new String[]
-                                {
-                                        PROMO_DATEADDED,
-                                        PROMO_APIURL,
-                                        PROMO_DECK,
-                                        PROMO_PROMOID,
-                                        PROMO_SITELINK,
-                                        PROMO_PROMONAME,
-                                        PROMO_RESTYPE,
-                                        PROMO_AUTHOR
-                                },
-                        PROMO_ROWID + "=" + rowId,  null, null, null, null, null);
-
-        if (mCursor != null)
-        {
-            mCursor.moveToFirst();
-        }
-        return mCursor;
     }
 
     public Cursor getPromoByPromoId(int promoId) throws SQLException
@@ -196,18 +187,106 @@ public class DatabaseManager {
     }
 
     //
-    public boolean updatePromo(long rowId, String dateAdded, String apiUrl, String deck, int promoId, String siteLink, String promoName, String resType, String author) throws SQLException
+    public boolean updatePromoByPromoId(int promoId, Promo promo) throws SQLException
     {
         ContentValues args = new ContentValues();
-        args.put(PROMO_DATEADDED, dateAdded);
-        args.put(PROMO_APIURL, apiUrl);
-        args.put(PROMO_DECK, deck);
-        args.put(PROMO_PROMOID, promoId);
-        args.put(PROMO_SITELINK, siteLink);
-        args.put(PROMO_PROMONAME, promoName);
-        args.put(PROMO_RESTYPE, resType);
-        args.put(PROMO_AUTHOR, author);
+        args.put(PROMO_DATEADDED, promo.getDateAdded());
+        args.put(PROMO_APIURL, promo.getApiDetailUrl());
+        args.put(PROMO_DECK, promo.getDeck());
+        args.put(PROMO_PROMOID, promo.getId());
+        args.put(PROMO_SITELINK, promo.getLink());
+        args.put(PROMO_PROMONAME, promo.getName());
+        args.put(PROMO_RESTYPE, promo.getResourceType());
+        args.put(PROMO_AUTHOR, promo.getUser());
         return db.update(PROMO_TABLE, args,
-                PROMO_ROWID + "=" + rowId, null) > 0;
+                PROMO_PROMOID + "=" + promoId, null) > 0;
+    }
+
+    public long insertReview(Review review) throws SQLException
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(REVIEW_DECK, review.getDeck());
+        initialValues.put(REVIEW_APIURL, review.getApiDetailUrl());
+        initialValues.put(REVIEW_GAMENAME, review.getGame().getName());
+        initialValues.put(REVIEW_GAMEID, review.getGame().getId());
+        initialValues.put(REVIEW_PUBLISHDATE, review.getPublishDate());
+        if(review.getRelease() != null)
+            initialValues.put(REVIEW_RELEASENAME, review.getRelease().getName());
+        initialValues.put(REVIEW_AUTHOR, review.getReviewer());
+        initialValues.put(REVIEW_SCORE, review.getScore());
+        initialValues.put(REVIEW_SITEURL, review.getSiteDetailUrl());
+        initialValues.put(REVIEW_PLATFORMS, review.getPlatforms());
+        return db.insert(REVIEW_TABLE, null, initialValues);
+    }
+
+    public boolean deleteReviewByGameId(int gameId) throws SQLException
+    {
+        //
+        return db.delete(REVIEW_TABLE, REVIEW_GAMEID +
+                "=" + gameId, null) > 0;
+    }
+
+    public boolean wipeReviews()
+    {
+        return db.delete(REVIEW_TABLE, "1", null) > 0;
+    }
+
+    public Cursor getAllReviews() throws SQLException
+    {
+        return db.query(REVIEW_TABLE, new String[]
+                        {
+                                REVIEW_APIURL,
+                                REVIEW_DECK,
+                                REVIEW_GAMENAME,
+                                REVIEW_GAMEID,
+                                REVIEW_PUBLISHDATE,
+                                REVIEW_RELEASENAME,
+                                REVIEW_AUTHOR,
+                                REVIEW_SCORE,
+                                REVIEW_SITEURL,
+                                REVIEW_PLATFORMS
+                        },
+                null, null, null, null, null);
+    }
+
+    public Cursor getReviewByGameId(int gameId) throws SQLException
+    {
+        Cursor mCursor = db.query(true, REVIEW_TABLE, new String[]
+                        {
+                                REVIEW_APIURL,
+                                REVIEW_DECK,
+                                REVIEW_GAMENAME,
+                                REVIEW_GAMEID,
+                                REVIEW_PUBLISHDATE,
+                                REVIEW_RELEASENAME,
+                                REVIEW_AUTHOR,
+                                REVIEW_SCORE,
+                                REVIEW_SITEURL,
+                                REVIEW_PLATFORMS
+                        },
+                REVIEW_GAMEID + "=" + gameId, null, null, null, null, null);
+
+        if (mCursor != null)
+        {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
+    public boolean updateReviewByGameId(int gameId, Review review) throws SQLException
+    {
+        ContentValues args = new ContentValues();
+        args.put(REVIEW_DECK, review.getDeck());
+        args.put(REVIEW_APIURL, review.getApiDetailUrl());
+        args.put(REVIEW_GAMENAME, review.getGame().getName());
+        args.put(REVIEW_GAMEID, review.getGame().getId());
+        args.put(REVIEW_PUBLISHDATE, review.getPublishDate());
+        args.put(REVIEW_RELEASENAME, review.getRelease().getName());
+        args.put(REVIEW_AUTHOR, review.getReviewer());
+        args.put(REVIEW_SCORE, review.getScore());
+        args.put(REVIEW_SITEURL, review.getSiteDetailUrl());
+        args.put(REVIEW_PLATFORMS, review.getPlatforms());
+        return db.update(REVIEW_TABLE, args,
+                REVIEW_GAMEID + "=" + gameId, null) > 0;
     }
 }

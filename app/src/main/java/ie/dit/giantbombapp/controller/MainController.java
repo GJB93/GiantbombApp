@@ -1,19 +1,20 @@
 package ie.dit.giantbombapp.controller;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import java.util.List;
 
-import ie.dit.giantbombapp.R;
 import ie.dit.giantbombapp.controller.api.ApiManager;
 import ie.dit.giantbombapp.model.database.DatabaseManager;
-import ie.dit.giantbombapp.model.pojos.GenericContainer;
-import ie.dit.giantbombapp.model.pojos.PromoResult;
+import ie.dit.giantbombapp.model.pojos.Promo;
 
-import ie.dit.giantbombapp.model.pojos.ResultsContainer;
+import ie.dit.giantbombapp.model.pojos.PromosContainer;
+import ie.dit.giantbombapp.model.pojos.Review;
+import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,48 +29,56 @@ public class MainController
     private ApiManager mApi = new ApiManager();
     private DatabaseManager db;
     private Context ctx;
-    private String apiKey, format;
+    private String apiKey, format, sort;
+    private ConnectivityManager connManager;
+    private NetworkInfo networkInfo;
 
-    public MainController(Context ctx, String apiKey, String format)
+    public MainController(Context ctx, String apiKey, String format, String sort)
     {
         this.ctx = ctx;
         this.apiKey = apiKey;
         this.format = format;
+        this.sort = sort;
         db = new DatabaseManager(ctx);
         db.open();
+        connManager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     public Cursor fetchPromo(int id)
     {
-        Cursor cursor = null;
+        Cursor cursor = db.getPromoByPromoId(id);
 
-
-        Call<ResultsContainer> call = mApi.getApi().getPromo(id, apiKey, format);
-        call.enqueue(new Callback<ResultsContainer>() {
-            @Override
-            public void onResponse(Call<ResultsContainer> call, Response<ResultsContainer> response) {
-                //int statusCode = response.code();
-                ResultsContainer resultsContainer = response.body();
-                PromoResult promoResult = resultsContainer.getResults().get(0);
-                long dbInsert = db.insertPromo(promoResult.getDateAdded(), promoResult.getApiDetailUrl(), promoResult.getDeck(),
-                        promoResult.getId(), promoResult.getLink(), promoResult.getName(), promoResult.getResourceType(), promoResult.getUser());
-
-                if(dbInsert < 0)
+        networkInfo = connManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected() && cursor != null && cursor.getCount() == 0)
+        {
+            Call<PromosContainer> call = mApi.getApi().getPromo(id, apiKey, format);
+            call.enqueue(new Callback<PromosContainer>()
+            {
+                @Override
+                public void onResponse(Call<PromosContainer> call, Response<PromosContainer> response)
                 {
-                    Log.d(TAG, "There was an error when inserting the data into the database");
-                }
-                else
-                {
-                    Log.d(TAG, "The data was entered into the database");
-                }
-            }
+                    int statusCode = response.code();
+                    PromosContainer promosContainer = response.body();
+                    Promo promo = promosContainer.getResults().get(0);
+                    long dbInsert = db.insertPromo(promo);
 
-            @Override
-            public void onFailure(Call<ResultsContainer> call, Throwable t) {
-                Log.d(TAG, t.getMessage());
-            }
-        });
-        cursor = db.getPromoByPromoId(id);
+                    if (dbInsert < 0)
+                    {
+                        Log.d(TAG, "There was an error when inserting the Promo data into the database");
+                    } else
+                    {
+                        Log.d(TAG, "The Promo data was entered into the database");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PromosContainer> call, Throwable t)
+                {
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+            cursor = db.getPromoByPromoId(id);
+        }
 
 
         return cursor;
@@ -78,38 +87,127 @@ public class MainController
     public Cursor fetchAllPromos()
     {
         Cursor cursor = null;
-        Call<ResultsContainer> call = mApi.getApi().getAllPromos(apiKey, format);
-        call.enqueue(new Callback<ResultsContainer>() {
-            @Override
-            public void onResponse(Call<ResultsContainer> call, Response<ResultsContainer> response) {
-                Log.d(TAG, "Response was successful");
-                //int statusCode = response.code();
-                ResultsContainer resultsContainer = response.body();
-                List<PromoResult> results = resultsContainer.getResults();
-                Log.d(TAG, results.toString());
 
-                for(PromoResult result:results)
+        networkInfo = connManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected())
+        {
+            db.wipePromos();
+            Call<PromosContainer> call = mApi.getApi().getAllPromos(apiKey, format);
+            call.enqueue(new Callback<PromosContainer>()
+            {
+                @Override
+                public void onResponse(Call<PromosContainer> call, Response<PromosContainer> response)
                 {
+                    Log.d(TAG, "Response was successful");
+                    int statusCode = response.code();
+                    PromosContainer promosContainer = response.body();
+                    List<Promo> results = promosContainer.getResults();
 
-                    long dbInsert = db.insertPromo(result.getDateAdded(), result.getApiDetailUrl(), result.getDeck(),
-                            result.getId(), result.getLink(), result.getName(), result.getResourceType(), result.getUser());
+                    for (Promo result : results)
+                    {
+
+                        long dbInsert = db.insertPromo(result);
+
+                        if (dbInsert < 0)
+                        {
+                            Log.d(TAG, "There was an error when inserting the promo data into the database");
+                        }
+                    }
+                    Log.d(TAG, "All promo data was entered into the database");
+                }
+
+                @Override
+                public void onFailure(Call<PromosContainer> call, Throwable t)
+                {
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+        }
+        cursor = db.getAllPromos();
+
+
+        return cursor;
+    }
+
+    public Cursor fetchReview(int id)
+    {
+        Cursor cursor = db.getReviewByGameId(id);
+
+        networkInfo = connManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected() && cursor != null && cursor.getCount() == 0)
+        {
+            Call<ReviewsContainer> call = mApi.getApi().getReview(id, apiKey, format);
+            call.enqueue(new Callback<ReviewsContainer>()
+            {
+                @Override
+                public void onResponse(Call<ReviewsContainer> call, Response<ReviewsContainer> response)
+                {
+                    int statusCode = response.code();
+                    ReviewsContainer reviewsContainer = response.body();
+                    Review review = reviewsContainer.getResults().get(0);
+                    long dbInsert = db.insertReview(review);
 
                     if (dbInsert < 0)
                     {
-                        Log.d(TAG, "There was an error when inserting the data into the database");
+                        Log.d(TAG, "There was an error when inserting the review data into the database");
                     } else
                     {
-                        Log.d(TAG, "The data was entered into the database");
+                        Log.d(TAG, "The review data was entered into the database");
                     }
                 }
 
-            }
+                @Override
+                public void onFailure(Call<ReviewsContainer> call, Throwable t)
+                {
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+            cursor = db.getReviewByGameId(id);
+        }
 
-            @Override
-            public void onFailure(Call<ResultsContainer> call, Throwable t) {
-                Log.d(TAG, t.getMessage());
-            }
-        });
+        return cursor;
+    }
+
+    public Cursor fetchAllReviews()
+    {
+        Cursor cursor = null;
+
+        networkInfo = connManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected())
+        {
+            db.wipeReviews();
+            Call<ReviewsContainer> call = mApi.getApi().getAllReviews(apiKey, format, sort);
+            call.enqueue(new Callback<ReviewsContainer>()
+            {
+                @Override
+                public void onResponse(Call<ReviewsContainer> call, Response<ReviewsContainer> response)
+                {
+                    Log.d(TAG, "Response was successful");
+                    //int statusCode = response.code();
+                    ReviewsContainer reviewsContainer = response.body();
+                    List<Review> results = reviewsContainer.getResults();
+
+                    for (Review result : results)
+                    {
+
+                        long dbInsert = db.insertReview(result);
+
+                        if (dbInsert < 0)
+                        {
+                            Log.d(TAG, "There was an error when inserting the data into the database");
+                        }
+                    }
+                    Log.d(TAG, "All review data was entered into the database");
+
+                }
+
+                @Override
+                public void onFailure(Call<ReviewsContainer> call, Throwable t)
+                {
+                    Log.d(TAG, t.getMessage());
+                }
+            });
+        }
         cursor = db.getAllPromos();
 
 

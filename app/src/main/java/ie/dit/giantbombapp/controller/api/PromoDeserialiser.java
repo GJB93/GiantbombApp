@@ -14,46 +14,46 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.dit.giantbombapp.model.pojos.PromoResult;
-import ie.dit.giantbombapp.model.pojos.ResultsContainer;
+import ie.dit.giantbombapp.model.pojos.Promo;
+import ie.dit.giantbombapp.model.pojos.PromosContainer;
 
 /**
  * Created by graha on 16/11/2016.
  */
 
-class PromoDeserialiser implements JsonDeserializer<ResultsContainer>
+class PromoDeserialiser implements JsonDeserializer<PromosContainer>
 {
     private static final String TAG = "PromoDeserialiser";
 
     @Override
-    public ResultsContainer deserialize(JsonElement je, Type type, JsonDeserializationContext jdc)
+    public PromosContainer deserialize(JsonElement je, Type type, JsonDeserializationContext jdc)
         throws JsonParseException
     {
-        ResultsContainer resultsContainer = new ResultsContainer();
+        PromosContainer promosContainer = new PromosContainer();
         if(je.getAsJsonObject().get("results").isJsonArray())
         {
             Log.d(TAG, "JsonElement is an array");
             JsonElement jsonElement = je.getAsJsonObject().get("results");
             JsonArray jsonArray = jsonElement.getAsJsonArray();
-            List<PromoResult> results = new ArrayList<>();
+            List<Promo> results = new ArrayList<>();
             for(int i=0; i<jsonArray.size(); i++)
             {
                 JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
-                PromoResult promoResult = new Gson().fromJson(jsonObject, PromoResult.class);
-                results.add(promoResult);
+                Promo promo = new Gson().fromJson(jsonObject, Promo.class);
+                results.add(promo);
             }
-            resultsContainer.setResults(results);
-            return resultsContainer;
+            promosContainer.setResults(results);
+            return promosContainer;
         }
         else
         {
             Log.d(TAG, "JsonElement is an object");
             JsonElement jsonElement = je.getAsJsonObject().get("results");
-            PromoResult promoResult = jdc.deserialize(jsonElement, PromoResult.class);
-            List<PromoResult> promoResultList = new ArrayList<>(1);
-            promoResultList.add(promoResult);
-            resultsContainer.setResults(promoResultList);
-            return resultsContainer;
+            Promo promo = jdc.deserialize(jsonElement, Promo.class);
+            List<Promo> promoList = new ArrayList<>(1);
+            promoList.add(promo);
+            promosContainer.setResults(promoList);
+            return promosContainer;
         }
     }
 }

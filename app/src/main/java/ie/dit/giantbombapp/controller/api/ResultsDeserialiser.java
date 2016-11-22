@@ -10,23 +10,23 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.dit.giantbombapp.model.pojos.PromoResult;
+import ie.dit.giantbombapp.model.pojos.Promo;
 
 /**
  * Created by graha on 17/11/2016.
  */
 
-public class ResultsDeserialiser implements JsonDeserializer<List<PromoResult>>
+public class ResultsDeserialiser implements JsonDeserializer<List<Promo>>
 {
     @Override
-    public List<PromoResult> deserialize(JsonElement je, Type type, JsonDeserializationContext jdc) throws JsonParseException
+    public List<Promo> deserialize(JsonElement je, Type type, JsonDeserializationContext jdc) throws JsonParseException
     {
         JsonArray data = je.getAsJsonObject().getAsJsonArray("results");
-        List<PromoResult> myList = new ArrayList<>();
+        List<Promo> myList = new ArrayList<>();
 
         for(JsonElement e:data)
         {
-            myList.add((PromoResult)jdc.deserialize(e, PromoResult.class));
+            myList.add((Promo)jdc.deserialize(e, Promo.class));
         }
 
         return myList;
