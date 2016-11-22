@@ -19,10 +19,11 @@ public class PromoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.promo_activity);
-        controller = new MainController(getBaseContext());
+        controller = new MainController(getBaseContext(), getString(R.string.api_key), getString(R.string.format));
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 
-        controller.fetchAllPromos();
+        //controller.fetchPromo(12229);
+        //controller.fetchAllPromos();
 
     }
 }

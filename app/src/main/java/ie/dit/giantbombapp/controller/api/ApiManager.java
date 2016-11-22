@@ -2,13 +2,8 @@ package ie.dit.giantbombapp.controller.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.List;
-
-import ie.dit.giantbombapp.model.pojos.PromoResult;
-import ie.dit.giantbombapp.model.pojos.PromoResults;
+import ie.dit.giantbombapp.model.pojos.ResultsContainer;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,11 +19,9 @@ public class ApiManager {
     {
         if(mApi == null)
         {
-            Type listType = new TypeToken<List<PromoResult>>(){}.getType();
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                    .registerTypeAdapter(PromoResult.class, new MyDeserialiser<PromoResult>())
-                    .registerTypeAdapter(listType, new ResultsDeserialiser())
+                    .registerTypeAdapter(ResultsContainer.class, new PromoDeserialiser())
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()

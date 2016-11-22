@@ -1,8 +1,6 @@
 package ie.dit.giantbombapp.controller.api;
 
-import java.util.List;
-
-import ie.dit.giantbombapp.model.pojos.PromoResult;
+import ie.dit.giantbombapp.model.pojos.ResultsContainer;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,8 +13,8 @@ import retrofit2.http.Query;
 public interface GiantbombApi {
 
     @GET("promos/")
-    Call<List<PromoResult>> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);
+    Call<ResultsContainer> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);
 
     @GET("promo/{id}/")
-    Call<PromoResult> getPromo(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
+    Call<ResultsContainer> getPromo(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
 }

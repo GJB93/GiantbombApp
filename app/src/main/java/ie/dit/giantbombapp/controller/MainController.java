@@ -12,7 +12,7 @@ import ie.dit.giantbombapp.controller.api.ApiManager;
 import ie.dit.giantbombapp.model.database.DatabaseManager;
 import ie.dit.giantbombapp.model.pojos.PromoResult;
 
-import ie.dit.giantbombapp.model.pojos.PromoResults;
+import ie.dit.giantbombapp.model.pojos.ResultsContainer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,15 +24,16 @@ import retrofit2.Response;
 public class MainController
 {
     private static final String TAG = "MainController";
-    private Resources resources = Resources.getSystem();
     private ApiManager mApi = new ApiManager();
     private DatabaseManager db;
     private Context ctx;
+    private String apiKey, format;
 
-    public MainController(Context ctx)
+    public MainController(Context ctx, String apiKey, String format)
     {
         this.ctx = ctx;
-        resources = Resources.getSystem();
+        this.apiKey = apiKey;
+        this.format = format;
         db = new DatabaseManager(ctx);
         db.open();
     }
@@ -42,12 +43,13 @@ public class MainController
         Cursor cursor = null;
 
 
-        Call<PromoResult> call = mApi.getApi().getPromo(id, "8481d27bba6dbd03cb21734fea664a72d6436747", "json");
-        call.enqueue(new Callback<PromoResult>() {
+        Call<ResultsContainer> call = mApi.getApi().getPromo(id, apiKey, format);
+        call.enqueue(new Callback<ResultsContainer>() {
             @Override
-            public void onResponse(Call<PromoResult> call, Response<PromoResult> response) {
+            public void onResponse(Call<ResultsContainer> call, Response<ResultsContainer> response) {
                 //int statusCode = response.code();
-                PromoResult promoResult = response.body();
+                ResultsContainer resultsContainer = response.body();
+                PromoResult promoResult = resultsContainer.getResults().get(0);
                 long dbInsert = db.insertPromo(promoResult.getDateAdded(), promoResult.getApiDetailUrl(), promoResult.getDeck(),
                         promoResult.getId(), promoResult.getLink(), promoResult.getName(), promoResult.getResourceType(), promoResult.getUser());
 
@@ -62,7 +64,7 @@ public class MainController
             }
 
             @Override
-            public void onFailure(Call<PromoResult> call, Throwable t) {
+            public void onFailure(Call<ResultsContainer> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
             }
         });
@@ -75,15 +77,14 @@ public class MainController
     public Cursor fetchAllPromos()
     {
         Cursor cursor = null;
-        Call<List<PromoResult>> call = mApi.getApi().getAllPromos(resources.getString(R.string.api_key), resources.getString(R.string.format));
-        call.enqueue(new Callback<List<PromoResult>>() {
+        Call<ResultsContainer> call = mApi.getApi().getAllPromos(apiKey, format);
+        call.enqueue(new Callback<ResultsContainer>() {
             @Override
-            public void onResponse(Call<List<PromoResult>> call, Response<List<PromoResult>> response) {
+            public void onResponse(Call<ResultsContainer> call, Response<ResultsContainer> response) {
                 Log.d(TAG, "Response was successful");
                 //int statusCode = response.code();
-                List<PromoResult> results;
-                results = response.body();
-
+                ResultsContainer resultsContainer = response.body();
+                List<PromoResult> results = resultsContainer.getResults();
                 Log.d(TAG, results.toString());
 
                 for(PromoResult result:results)
@@ -104,7 +105,7 @@ public class MainController
             }
 
             @Override
-            public void onFailure(Call<List<PromoResult>> call, Throwable t) {
+            public void onFailure(Call<ResultsContainer> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
             }
         });
