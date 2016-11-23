@@ -64,7 +64,7 @@ public class MainController
 
     public Cursor fetchAllReviews()
     {
-        return db.getAllPromos();
+        return db.getAllReviews();
     }
 
     public void getReviewData()
@@ -72,7 +72,7 @@ public class MainController
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected())
         {
-            db.wipePromos();
+            db.wipeReviews();
             Call<ReviewsContainer> call = mApi.getApi().getAllReviews(apiKey, format, sort);
             ReviewsContainer container;
             try
@@ -95,6 +95,7 @@ public class MainController
             {
                 Log.d(TAG, "IOException when attempting to execute API call");
             }
+            Log.d(TAG, "Entered Review Data to Database");
         }
     }
 

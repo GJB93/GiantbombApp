@@ -69,7 +69,7 @@ public class DatabaseManager {
     private static final String REVIEW_DROP = "drop table review;";
 
     private static final String DATABASE_NAME 	= "Giantbomb";
-    private static final int DATABASE_VERSION 	= 7;
+    private static final int DATABASE_VERSION 	= 9;
     private static final String DATABASE_CREATE =
             PROMO_CREATE + REVIEW_CREATE;
     private final Context context;

@@ -69,20 +69,20 @@ public class ReviewListActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result)
         {
-            mData = controller.fetchAllPromos();
-            ListView promo_list = (ListView) findViewById(R.id.promo_list);
+            mData = controller.fetchAllReviews();
+            ListView review_list = (ListView) findViewById(R.id.review_list);
             Log.d(TAG, "Set the list view");
-            MyCustomAdapter customAdapter = new MyCustomAdapter(getBaseContext(), mData);
-            promo_list.setAdapter(customAdapter);
-            promo_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            ReviewCursorAdapter customAdapter = new ReviewCursorAdapter(getBaseContext(), mData);
+            review_list.setAdapter(customAdapter);
+            review_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
                     Adapter listAdapter = parent.getAdapter();
                     Cursor data = (Cursor) listAdapter.getItem(position);
-                    Intent i = new Intent(getBaseContext(), PromoActivity.class);
-                    i.putExtra("PromoId", data.getInt(4));
+                    Intent i = new Intent(getBaseContext(), ReviewActivity.class);
+                    i.putExtra("GameId", data.getInt(4));
                     startActivity(i);
                 }
             });

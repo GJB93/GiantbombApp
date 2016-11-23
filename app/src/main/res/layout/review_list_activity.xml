@@ -17,6 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/my_toolbar"
-        android:id="@+id/promo_list"/>
+        android:id="@+id/review_list"/>
 
 </RelativeLayout>

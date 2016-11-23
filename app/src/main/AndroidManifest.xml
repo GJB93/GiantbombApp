@@ -21,6 +21,8 @@
                   android:label="Promo"/>
         <activity android:name=".view.ReviewListActivity"
                   android:label="Reviews"/>
+        <activity android:name=".view.ReviewActivity"
+                  android:label="Review"/>
     </application>
 
 </manifest>

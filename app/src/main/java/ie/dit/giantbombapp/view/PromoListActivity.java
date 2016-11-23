@@ -55,6 +55,12 @@ public class PromoListActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "There are no settings", Toast.LENGTH_SHORT).show();
                 return true;
             }
+
+            case R.id.to_reviews:
+            {
+                Intent i = new Intent(getBaseContext(), ReviewListActivity.class);
+                startActivity(i);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -73,7 +79,7 @@ public class PromoListActivity extends AppCompatActivity {
             mData = controller.fetchAllPromos();
             ListView promo_list = (ListView) findViewById(R.id.promo_list);
             Log.d(TAG, "Set the list view");
-            MyCustomAdapter customAdapter = new MyCustomAdapter(getBaseContext(), mData);
+            PromoCursorAdapter customAdapter = new PromoCursorAdapter(getBaseContext(), mData);
             promo_list.setAdapter(customAdapter);
             promo_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
