@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".view.PromoActivity"
                   android:label="Promo"/>
+        <activity android:name=".view.ReviewListActivity"
+                  android:label="Reviews"/>
     </application>
 
 </manifest>

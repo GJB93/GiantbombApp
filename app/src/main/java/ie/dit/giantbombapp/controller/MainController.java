@@ -49,60 +49,57 @@ public class MainController
 
     public Cursor fetchPromo(int id)
     {
-        Cursor cursor = db.getPromoByPromoId(id);
-
-
-        /*
-        networkInfo = connManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected() && cursor != null && cursor.getCount() == 0)
-        {
-            Call<PromosContainer> call = mApi.getApi().getPromo(id, apiKey, format);
-            call.enqueue(new Callback<PromosContainer>()
-            {
-                @Override
-                public void onResponse(Call<PromosContainer> call, Response<PromosContainer> response)
-                {
-                    int statusCode = response.code();
-                    PromosContainer promosContainer = response.body();
-                    Promo promo = null;
-                    try
-                    {
-                        promo = promosContainer.getResults().get(0);
-                        long dbInsert = db.insertPromo(promo);
-
-                        if (dbInsert < 0)
-                        {
-                            Log.d(TAG, "There was an error when inserting the Promo data into the database");
-                        } else
-                        {
-                            Log.d(TAG, "The Promo data was entered into the database");
-                        }
-                    }
-                    catch (IndexOutOfBoundsException e)
-                    {
-                        Log.d(TAG, "There was an index out of bounds exception in fetch promo");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<PromosContainer> call, Throwable t)
-                {
-                    Log.d(TAG, t.getMessage());
-                }
-            });
-            cursor = db.getPromoByPromoId(id);
-        }
-        */
-
-
-        return cursor;
+        return db.getPromoByPromoId(id);
     }
 
     public Cursor fetchAllPromos()
     {
-        Cursor cursor = null;
+        return db.getAllPromos();
+    }
 
-        /*
+    public Cursor fetchReview(int id)
+    {
+        return db.getReviewByGameId(id);
+    }
+
+    public Cursor fetchAllReviews()
+    {
+        return db.getAllPromos();
+    }
+
+    public void getReviewData()
+    {
+        networkInfo = connManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected())
+        {
+            db.wipePromos();
+            Call<ReviewsContainer> call = mApi.getApi().getAllReviews(apiKey, format, sort);
+            ReviewsContainer container;
+            try
+            {
+                container = call.execute().body();
+                List<Review> results = container.getResults();
+
+                for (Review result : results)
+                {
+
+                    long dbInsert = db.insertReview(result);
+
+                    if (dbInsert < 0)
+                    {
+                        Log.d(TAG, "There was an error when inserting the promo data into the database");
+                    }
+                }
+
+            } catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+        }
+    }
+
+    public void getPromoData()
+    {
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected())
         {
@@ -124,188 +121,11 @@ public class MainController
                         Log.d(TAG, "There was an error when inserting the promo data into the database");
                     }
                 }
-                Log.d(TAG, "All promo data was entered into the database");
 
-            }
-            catch (IOException e)
+            } catch (IOException e)
             {
                 Log.d(TAG, "IOException when attempting to execute API call");
             }
-
-            /*
-            call.enqueue(new Callback<PromosContainer>()
-            {
-                @Override
-                public void onResponse(Call<PromosContainer> call, Response<PromosContainer> response)
-                {
-                    if(response.isSuccessful())
-                    {
-                        Log.d(TAG, "Response was successful");
-                    }
-                    int statusCode = response.code();
-                    PromosContainer promosContainer = response.body();
-                    List<Promo> results = promosContainer.getResults();
-
-                    for (Promo result : results)
-                    {
-
-                        long dbInsert = db.insertPromo(result);
-
-                        if (dbInsert < 0)
-                        {
-                            Log.d(TAG, "There was an error when inserting the promo data into the database");
-                        }
-                    }
-                    Log.d(TAG, "All promo data was entered into the database");
-                }
-
-                @Override
-                public void onFailure(Call<PromosContainer> call, Throwable t)
-                {
-                    Log.d(TAG, t.getMessage());
-                }
-            });
-            Log.d(TAG, "We got past the enqueue");
-
         }
-    */
-        Log.d(TAG, "Getting a cursor");
-        cursor = db.getAllPromos();
-
-        Log.d(TAG, "Cursor is being returned now");
-
-        return cursor;
-    }
-
-    public class GetPromosTask extends AsyncTask<Void, Void, String>
-    {
-        protected String doInBackground(Void... params)
-        {
-            networkInfo = connManager.getActiveNetworkInfo();
-            if(networkInfo != null && networkInfo.isConnected())
-            {
-                db.wipePromos();
-                Call<PromosContainer> call = mApi.getApi().getAllPromos(apiKey, format);
-                PromosContainer container;
-                try
-                {
-                    container = call.execute().body();
-                    List<Promo> results = container.getResults();
-
-                    for (Promo result : results)
-                    {
-
-                        long dbInsert = db.insertPromo(result);
-
-                        if (dbInsert < 0)
-                        {
-                            Log.d(TAG, "There was an error when inserting the promo data into the database");
-                        }
-                    }
-
-                } catch (IOException e)
-                {
-                    Log.d(TAG, "IOException when attempting to execute API call");
-                }
-                return "All promo data was entered into the database";
-            }
-            else
-            {
-                return "Couldn't connect to network";
-            }
-        }
-
-        protected void onPostExecute(String result)
-        {
-            if(result != null)
-            {
-                Log.d(TAG, result);
-            }
-        }
-    }
-
-    public Cursor fetchReview(int id)
-    {
-        Cursor cursor = db.getReviewByGameId(id);
-
-        networkInfo = connManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected() && cursor != null && cursor.getCount() == 0)
-        {
-            Call<ReviewsContainer> call = mApi.getApi().getReview(id, apiKey, format);
-            call.enqueue(new Callback<ReviewsContainer>()
-            {
-                @Override
-                public void onResponse(Call<ReviewsContainer> call, Response<ReviewsContainer> response)
-                {
-                    int statusCode = response.code();
-                    ReviewsContainer reviewsContainer = response.body();
-                    Review review = reviewsContainer.getResults().get(0);
-                    long dbInsert = db.insertReview(review);
-
-                    if (dbInsert < 0)
-                    {
-                        Log.d(TAG, "There was an error when inserting the review data into the database");
-                    } else
-                    {
-                        Log.d(TAG, "The review data was entered into the database");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ReviewsContainer> call, Throwable t)
-                {
-                    Log.d(TAG, t.getMessage());
-                }
-            });
-            cursor = db.getReviewByGameId(id);
-        }
-
-        return cursor;
-    }
-
-    public Cursor fetchAllReviews()
-    {
-        Cursor cursor = null;
-
-        networkInfo = connManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected())
-        {
-            db.wipeReviews();
-            Call<ReviewsContainer> call = mApi.getApi().getAllReviews(apiKey, format, sort);
-            call.enqueue(new Callback<ReviewsContainer>()
-            {
-                @Override
-                public void onResponse(Call<ReviewsContainer> call, Response<ReviewsContainer> response)
-                {
-                    Log.d(TAG, "Response was successful");
-                    //int statusCode = response.code();
-                    ReviewsContainer reviewsContainer = response.body();
-                    List<Review> results = reviewsContainer.getResults();
-
-                    for (Review result : results)
-                    {
-
-                        long dbInsert = db.insertReview(result);
-
-                        if (dbInsert < 0)
-                        {
-                            Log.d(TAG, "There was an error when inserting the data into the database");
-                        }
-                    }
-                    Log.d(TAG, "All review data was entered into the database");
-
-                }
-
-                @Override
-                public void onFailure(Call<ReviewsContainer> call, Throwable t)
-                {
-                    Log.d(TAG, t.getMessage());
-                }
-            });
-        }
-        cursor = db.getAllPromos();
-
-
-        return cursor;
     }
 }
