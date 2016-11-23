@@ -4,8 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import ie.dit.giantbombapp.controller.api.ApiManager;
@@ -48,6 +51,8 @@ public class MainController
     {
         Cursor cursor = db.getPromoByPromoId(id);
 
+
+        /*
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected() && cursor != null && cursor.getCount() == 0)
         {
@@ -59,15 +64,23 @@ public class MainController
                 {
                     int statusCode = response.code();
                     PromosContainer promosContainer = response.body();
-                    Promo promo = promosContainer.getResults().get(0);
-                    long dbInsert = db.insertPromo(promo);
+                    Promo promo = null;
+                    try
+                    {
+                        promo = promosContainer.getResults().get(0);
+                        long dbInsert = db.insertPromo(promo);
 
-                    if (dbInsert < 0)
+                        if (dbInsert < 0)
+                        {
+                            Log.d(TAG, "There was an error when inserting the Promo data into the database");
+                        } else
+                        {
+                            Log.d(TAG, "The Promo data was entered into the database");
+                        }
+                    }
+                    catch (IndexOutOfBoundsException e)
                     {
-                        Log.d(TAG, "There was an error when inserting the Promo data into the database");
-                    } else
-                    {
-                        Log.d(TAG, "The Promo data was entered into the database");
+                        Log.d(TAG, "There was an index out of bounds exception in fetch promo");
                     }
                 }
 
@@ -79,6 +92,7 @@ public class MainController
             });
             cursor = db.getPromoByPromoId(id);
         }
+        */
 
 
         return cursor;
@@ -88,17 +102,46 @@ public class MainController
     {
         Cursor cursor = null;
 
+        /*
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected())
         {
             db.wipePromos();
             Call<PromosContainer> call = mApi.getApi().getAllPromos(apiKey, format);
+            PromosContainer container;
+            try
+            {
+                container = call.execute().body();
+                List<Promo> results = container.getResults();
+
+                for (Promo result : results)
+                {
+
+                    long dbInsert = db.insertPromo(result);
+
+                    if (dbInsert < 0)
+                    {
+                        Log.d(TAG, "There was an error when inserting the promo data into the database");
+                    }
+                }
+                Log.d(TAG, "All promo data was entered into the database");
+
+            }
+            catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+
+            /*
             call.enqueue(new Callback<PromosContainer>()
             {
                 @Override
                 public void onResponse(Call<PromosContainer> call, Response<PromosContainer> response)
                 {
-                    Log.d(TAG, "Response was successful");
+                    if(response.isSuccessful())
+                    {
+                        Log.d(TAG, "Response was successful");
+                    }
                     int statusCode = response.code();
                     PromosContainer promosContainer = response.body();
                     List<Promo> results = promosContainer.getResults();
@@ -122,11 +165,63 @@ public class MainController
                     Log.d(TAG, t.getMessage());
                 }
             });
+            Log.d(TAG, "We got past the enqueue");
+
         }
+    */
+        Log.d(TAG, "Getting a cursor");
         cursor = db.getAllPromos();
 
+        Log.d(TAG, "Cursor is being returned now");
 
         return cursor;
+    }
+
+    public class GetPromosTask extends AsyncTask<Void, Void, String>
+    {
+        protected String doInBackground(Void... params)
+        {
+            networkInfo = connManager.getActiveNetworkInfo();
+            if(networkInfo != null && networkInfo.isConnected())
+            {
+                db.wipePromos();
+                Call<PromosContainer> call = mApi.getApi().getAllPromos(apiKey, format);
+                PromosContainer container;
+                try
+                {
+                    container = call.execute().body();
+                    List<Promo> results = container.getResults();
+
+                    for (Promo result : results)
+                    {
+
+                        long dbInsert = db.insertPromo(result);
+
+                        if (dbInsert < 0)
+                        {
+                            Log.d(TAG, "There was an error when inserting the promo data into the database");
+                        }
+                    }
+
+                } catch (IOException e)
+                {
+                    Log.d(TAG, "IOException when attempting to execute API call");
+                }
+                return "All promo data was entered into the database";
+            }
+            else
+            {
+                return "Couldn't connect to network";
+            }
+        }
+
+        protected void onPostExecute(String result)
+        {
+            if(result != null)
+            {
+                Log.d(TAG, result);
+            }
+        }
     }
 
     public Cursor fetchReview(int id)

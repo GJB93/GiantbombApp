@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ImageView
+        android:id="@+id/promo_thumbnail"
+        android:contentDescription="Thumbnail"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_width="@dimen/thumbnail_dim"
+        android:layout_height="@dimen/thumbnail_dim"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:id="@+id/promo_title"
+        android:layout_toRightOf="@id/promo_thumbnail"
+        android:text="Title"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/promo_author"
+        android:text="Author"
+        android:textSize="12sp"
+        android:layout_toRightOf="@id/promo_thumbnail"
+        android:layout_below="@id/promo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/promo_date"
+        android:text="Date"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:layout_below="@id/promo_author"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/promo_type"
+        android:layout_toRightOf="@id/promo_title"
+        android:contentDescription="ResType"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

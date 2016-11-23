@@ -21,9 +21,10 @@ public class DatabaseManager {
     private static final String PROMO_APIURL        = "api_url";
     private static final String PROMO_DATEADDED 	= "date_added";
     private static final String PROMO_DECK 	        = "deck";
+    private static final String PROMO_IMAGE         = "thumbnail";
     private static final String PROMO_PROMOID	    = "promo_id";
     private static final String PROMO_SITELINK      = "site_link";
-    private static final String PROMO_PROMONAME     = "promo_name";
+    private static final String PROMO_PROMOTITLE    = "promo_title";
     private static final String PROMO_RESTYPE       = "resource_type";
     private static final String PROMO_AUTHOR        = "author";
     private static final String PROMO_CREATE =
@@ -32,9 +33,10 @@ public class DatabaseManager {
                     PROMO_APIURL + " text," +
                     PROMO_DATEADDED + " text," +
                     PROMO_DECK + " text," +
+                    PROMO_IMAGE + " text," +
                     PROMO_PROMOID + " integer," +
                     PROMO_SITELINK + " text," +
-                    PROMO_PROMONAME + " text," +
+                    PROMO_PROMOTITLE + " text," +
                     PROMO_RESTYPE + " text," +
                     PROMO_AUTHOR + " text); ";
     private static final String PROMO_DROP = "drop table promo;";
@@ -67,7 +69,7 @@ public class DatabaseManager {
     private static final String REVIEW_DROP = "drop table review;";
 
     private static final String DATABASE_NAME 	= "Giantbomb";
-    private static final int DATABASE_VERSION 	= 5;
+    private static final int DATABASE_VERSION 	= 7;
     private static final String DATABASE_CREATE =
             PROMO_CREATE + REVIEW_CREATE;
     private final Context context;
@@ -129,9 +131,10 @@ public class DatabaseManager {
         initialValues.put(PROMO_DATEADDED, promo.getDateAdded());
         initialValues.put(PROMO_APIURL, promo.getApiDetailUrl());
         initialValues.put(PROMO_DECK, promo.getDeck());
+        initialValues.put(PROMO_IMAGE, promo.getImage().getThumbUrl());
         initialValues.put(PROMO_PROMOID, promo.getId());
         initialValues.put(PROMO_SITELINK, promo.getLink());
-        initialValues.put(PROMO_PROMONAME, promo.getName());
+        initialValues.put(PROMO_PROMOTITLE, promo.getName());
         initialValues.put(PROMO_RESTYPE, promo.getResourceType());
         initialValues.put(PROMO_AUTHOR, promo.getUser());
         return db.insert(PROMO_TABLE, null, initialValues);
@@ -153,10 +156,12 @@ public class DatabaseManager {
     {
         return db.query(PROMO_TABLE, new String[]
                         {
+                                PROMO_ROWID,
                                 PROMO_DATEADDED,
                                 PROMO_DECK,
+                                PROMO_IMAGE,
                                 PROMO_PROMOID,
-                                PROMO_PROMONAME,
+                                PROMO_PROMOTITLE,
                                 PROMO_RESTYPE,
                                 PROMO_AUTHOR
                         },
@@ -168,12 +173,14 @@ public class DatabaseManager {
         Cursor mCursor =
                 db.query(true, PROMO_TABLE, new String[]
                                 {
+                                        PROMO_ROWID,
                                         PROMO_DATEADDED,
                                         PROMO_APIURL,
                                         PROMO_DECK,
+                                        PROMO_IMAGE,
                                         PROMO_PROMOID,
                                         PROMO_SITELINK,
-                                        PROMO_PROMONAME,
+                                        PROMO_PROMOTITLE,
                                         PROMO_RESTYPE,
                                         PROMO_AUTHOR
                                 },
@@ -193,9 +200,10 @@ public class DatabaseManager {
         args.put(PROMO_DATEADDED, promo.getDateAdded());
         args.put(PROMO_APIURL, promo.getApiDetailUrl());
         args.put(PROMO_DECK, promo.getDeck());
+        args.put(PROMO_IMAGE, promo.getImage().getThumbUrl());
         args.put(PROMO_PROMOID, promo.getId());
         args.put(PROMO_SITELINK, promo.getLink());
-        args.put(PROMO_PROMONAME, promo.getName());
+        args.put(PROMO_PROMOTITLE, promo.getName());
         args.put(PROMO_RESTYPE, promo.getResourceType());
         args.put(PROMO_AUTHOR, promo.getUser());
         return db.update(PROMO_TABLE, args,
@@ -235,6 +243,7 @@ public class DatabaseManager {
     {
         return db.query(REVIEW_TABLE, new String[]
                         {
+                                REVIEW_ROWID,
                                 REVIEW_APIURL,
                                 REVIEW_DECK,
                                 REVIEW_GAMENAME,
@@ -253,6 +262,7 @@ public class DatabaseManager {
     {
         Cursor mCursor = db.query(true, REVIEW_TABLE, new String[]
                         {
+                                REVIEW_ROWID,
                                 REVIEW_APIURL,
                                 REVIEW_DECK,
                                 REVIEW_GAMENAME,
