@@ -2,6 +2,7 @@ package ie.dit.giantbombapp.view;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import ie.dit.giantbombapp.R;
 import ie.dit.giantbombapp.controller.MainController;
+import ie.dit.giantbombapp.view.adapters.PromoCursorAdapter;
 
 public class PromoListActivity extends AppCompatActivity {
 
@@ -66,11 +68,25 @@ public class PromoListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        controller.openDatabase();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        controller.closeDatabase();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.action_menu, menu);
+        getMenuInflater().inflate(R.menu.promo_action_menu, menu);
         return true;
     }
 
@@ -90,7 +106,17 @@ public class PromoListActivity extends AppCompatActivity {
             case R.id.to_reviews:
             {
                 Intent i = new Intent(getBaseContext(), ReviewListActivity.class);
+                finish();
                 startActivity(i);
+                return true;
+            }
+
+            case R.id.to_wiki:
+            {
+                Intent i = new Intent(getBaseContext(), SearchListActivity.class);
+                finish();
+                startActivity(i);
+                return true;
             }
         }
 
@@ -108,7 +134,6 @@ public class PromoListActivity extends AppCompatActivity {
         protected void onPostExecute(String result)
         {
             mData = controller.fetchAllPromos();
-            currentOffset = 10;
             promo_list = (ListView) findViewById(R.id.promo_list);
             Log.d(TAG, "Set the list view");
             PromoCursorAdapter customAdapter = new PromoCursorAdapter(getBaseContext(), mData);
@@ -120,11 +145,21 @@ public class PromoListActivity extends AppCompatActivity {
                 {
                     Adapter listAdapter = parent.getAdapter();
                     Cursor data = (Cursor) listAdapter.getItem(position);
+
+                    /*
+                    Uri uri = Uri.parse(data.getString(data.getColumnIndexOrThrow("site_url")));
+                    Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                    finish();
+                    startActivity(i);
+
+                    */
+
                     Intent i = new Intent(getBaseContext(), PromoActivity.class);
-                    i.putExtra("PromoId", data.getInt(4));
+                    i.putExtra("PromoId", data.getInt(data.getColumnIndexOrThrow("promo_id")));
                     startActivity(i);
                 }
             });
+            currentOffset = 10;
         }
     }
 

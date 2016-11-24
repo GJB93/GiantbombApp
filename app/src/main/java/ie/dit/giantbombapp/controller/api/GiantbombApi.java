@@ -2,6 +2,7 @@ package ie.dit.giantbombapp.controller.api;
 
 import ie.dit.giantbombapp.model.pojos.PromosContainer;
 import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
+import ie.dit.giantbombapp.model.pojos.SearchContainer;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -21,12 +22,17 @@ public interface GiantbombApi {
     Call<PromosContainer> getMorePromos(@Query("api_key") String apiKey, @Query("format") String format,
                                         @Query("limit") int limit, @Query("offset") int offset);
 
-    @GET("promo/{id}/")
-    Call<PromosContainer> getPromo(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
+    @GET("reviews/")
+    Call<ReviewsContainer> getInitialReviews(@Query("api_key") String apiKey, @Query("format") String format, @Query("sort") String sort, @Query("limit") int limit);
 
     @GET("reviews/")
-    Call<ReviewsContainer> getAllReviews(@Query("api_key") String apiKey, @Query("format") String format, @Query("sort") String sort, @Query("limit") int limit);
+    Call<ReviewsContainer> getMoreReviews(@Query("api_key") String apiKey, @Query("format") String format, @Query("sort") String sort,
+                                          @Query("limit") int limit, @Query("offset") int offset);
 
-    @GET("review/{id}/")
-    Call<ReviewsContainer> getReview(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
+    @GET("search/")
+    Call<SearchContainer> searchForQuery(@Query("api_key") String apiKey, @Query("format") String format, @Query("query") String query,
+                                         @Query("resources") String resources);
+
+    @GET("{resource}/")
+    Call<SearchContainer> searchResource(@Path("resource") String resource, @Query("api_key") String apiKey, @Query("format") String format, @Query("filter") String query);
 }

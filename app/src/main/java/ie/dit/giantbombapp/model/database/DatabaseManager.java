@@ -23,7 +23,7 @@ public class DatabaseManager {
     private static final String PROMO_DECK 	        = "deck";
     private static final String PROMO_IMAGE         = "thumbnail";
     private static final String PROMO_PROMOID	    = "promo_id";
-    private static final String PROMO_SITELINK      = "site_link";
+    private static final String PROMO_SITELINK      = "site_url";
     private static final String PROMO_PROMOTITLE    = "promo_title";
     private static final String PROMO_RESTYPE       = "resource_type";
     private static final String PROMO_AUTHOR        = "author";
@@ -69,7 +69,7 @@ public class DatabaseManager {
     private static final String REVIEW_DROP = "drop table review;";
 
     private static final String DATABASE_NAME 	= "Giantbomb";
-    private static final int DATABASE_VERSION 	= 9;
+    private static final int DATABASE_VERSION 	= 10;
     private static final String DATABASE_CREATE =
             PROMO_CREATE + REVIEW_CREATE;
     private final Context context;
@@ -163,7 +163,8 @@ public class DatabaseManager {
                                 PROMO_PROMOID,
                                 PROMO_PROMOTITLE,
                                 PROMO_RESTYPE,
-                                PROMO_AUTHOR
+                                PROMO_AUTHOR,
+                                PROMO_SITELINK
                         },
                 null, null, null, null, null);
     }

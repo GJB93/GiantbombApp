@@ -4,48 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <ImageView
-        android:id="@+id/promo_thumbnail"
-        android:contentDescription="Thumbnail"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_width="@dimen/thumbnail_dim"
-        android:layout_height="@dimen/thumbnail_dim"
-        android:layout_alignParentLeft="true"/>
-
-    <TextView
-        android:id="@+id/promo_title"
-        android:layout_toRightOf="@id/promo_thumbnail"
-        android:text="Title"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/promo_author"
-        android:text="Author"
-        android:layout_toRightOf="@id/promo_thumbnail"
-        android:layout_below="@id/promo_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/promo_date"
-        android:text="Date"
-        android:textStyle="italic"
-        android:layout_below="@id/promo_author"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <ImageView
         android:id="@+id/promo_type"
-        android:layout_alignParentTop="true"
+        android:paddingTop="@dimen/list_text_padding_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_alignParentRight="true"
-        android:contentDescription="ResType"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/restype"
         android:minWidth="16dp"
         android:maxWidth="16dp"
         android:minHeight="16dp"
         android:maxHeight="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/promo_title"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/list_text_padding_vertical"/>
+
+    <TextView
+        android:id="@+id/promo_author"
+        android:layout_below="@id/promo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/promo_date"
+        android:textStyle="italic"
+        android:layout_below="@id/promo_author"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/list_text_padding_vertical"/>
 </RelativeLayout>

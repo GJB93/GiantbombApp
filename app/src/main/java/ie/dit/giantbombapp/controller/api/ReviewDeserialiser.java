@@ -30,6 +30,7 @@ class ReviewDeserialiser implements JsonDeserializer<ReviewsContainer>
             throws JsonParseException
     {
         ReviewsContainer reviewsContainer = new ReviewsContainer();
+        reviewsContainer.setNumberOfTotalResults(je.getAsJsonObject().get("number_of_total_results").getAsInt());
         if(je.getAsJsonObject().get("results").isJsonArray())
         {
             Log.d(TAG, "JsonElement is an array");

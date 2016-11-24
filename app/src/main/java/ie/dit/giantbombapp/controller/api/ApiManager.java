@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import ie.dit.giantbombapp.model.pojos.PromosContainer;
 import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
+import ie.dit.giantbombapp.model.pojos.SearchContainer;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,6 +25,7 @@ public class ApiManager {
                     .setDateFormat("yyyy-MM-dd HH:mm:ss")
                     .registerTypeAdapter(PromosContainer.class, new PromoDeserialiser())
                     .registerTypeAdapter(ReviewsContainer.class, new ReviewDeserialiser())
+                    .registerTypeAdapter(SearchContainer.class, new SearchDeserialiser())
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()

@@ -3,4 +3,24 @@
     <string name="api_key"></string>
     <string name="format">json</string>
     <string name="sort">publish_date:desc</string>
+    <string name="thumbnail">Thumbnail</string>
+    <string name="restype">ResType</string>
+    <string name="go_to_browser">Go to browser</string>
+    <string-array name="resource_types">
+        <item>Accessories</item>
+        <item>Characters</item>
+        <item>Companies</item>
+        <item>Concepts</item>
+        <item>Franchises</item>
+        <item>Games</item>
+        <item>Game Ratings</item>
+        <item>Genres</item>
+        <item>Locations</item>
+        <item>Objects</item>
+        <item>People</item>
+        <item>Platforms</item>
+        <item>Rating Boards</item>
+        <item>Regions</item>
+        <item>Releases</item>
+    </string-array>
 </resources>
