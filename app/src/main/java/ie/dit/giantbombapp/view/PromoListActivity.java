@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,15 +25,45 @@ public class PromoListActivity extends AppCompatActivity {
     private static final String TAG = "PromoListActivity";
     private MainController controller;
     private Cursor mData;
+    private ListView promo_list;
+    private boolean loadingFlag = false;
+    private static int currentOffset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.promo_list_activity);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
         controller = new MainController(getBaseContext(), getString(R.string.api_key), getString(R.string.format), getString(R.string.sort));
-        new GetPromosTask().execute();
+        promo_list = (ListView) findViewById(R.id.promo_list);
+        new GetInitialPromosTask().execute();
+        promo_list.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(firstVisibleItem+visibleItemCount==totalItemCount && totalItemCount != 0 && totalItemCount < controller.getTotalPromoResults())
+                {
+                    if(!loadingFlag)
+                    {
+                        loadingFlag = true;
+                        Log.d(TAG, "" + totalItemCount);
+                        int numberOfPromosLeft = controller.getTotalPromoResults() - currentOffset;
+                        Log.d(TAG, "Number of Promos Left: " + numberOfPromosLeft);
+                        if(visibleItemCount < numberOfPromosLeft)
+                            new GetMorePromosTask().execute(visibleItemCount, currentOffset);
+                        else
+                            new GetMorePromosTask().execute(numberOfPromosLeft, currentOffset);
+                    }
+                }
+            }
+        });
     }
 
 
@@ -66,18 +97,19 @@ public class PromoListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class GetPromosTask extends AsyncTask<Void, Void, String>
+    private class GetInitialPromosTask extends AsyncTask<Void, Void, String>
     {
         protected String doInBackground(Void... params)
         {
-            controller.getPromoData();
+            controller.getInitialPromoData();
             return null;
         }
 
         protected void onPostExecute(String result)
         {
             mData = controller.fetchAllPromos();
-            ListView promo_list = (ListView) findViewById(R.id.promo_list);
+            currentOffset = 10;
+            promo_list = (ListView) findViewById(R.id.promo_list);
             Log.d(TAG, "Set the list view");
             PromoCursorAdapter customAdapter = new PromoCursorAdapter(getBaseContext(), mData);
             promo_list.setAdapter(customAdapter);
@@ -93,6 +125,24 @@ public class PromoListActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             });
+        }
+    }
+
+    private class GetMorePromosTask extends AsyncTask<Integer, Void, Integer>
+    {
+        protected Integer doInBackground(Integer... params)
+        {
+            controller.getMorePromoData(params[0], params[1]);
+            return params[0];
+        }
+
+        protected void onPostExecute(Integer result)
+        {
+            PromoCursorAdapter adapter = (PromoCursorAdapter) promo_list.getAdapter();
+            adapter.changeCursor(controller.fetchAllPromos());
+            adapter.notifyDataSetChanged();
+            currentOffset+=result;
+            loadingFlag = false;
         }
     }
 }

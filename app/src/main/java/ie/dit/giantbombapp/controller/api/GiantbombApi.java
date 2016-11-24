@@ -14,13 +14,18 @@ import retrofit2.http.Query;
 public interface GiantbombApi {
 
     @GET("promos/")
-    Call<PromosContainer> getAllPromos(@Query("api_key") String apiKey, @Query("format") String format);
+    Call<PromosContainer> getInitialPromos(@Query("api_key") String apiKey, @Query("format") String format,
+                                           @Query("limit") int limit);
+
+    @GET("promos/")
+    Call<PromosContainer> getMorePromos(@Query("api_key") String apiKey, @Query("format") String format,
+                                        @Query("limit") int limit, @Query("offset") int offset);
 
     @GET("promo/{id}/")
     Call<PromosContainer> getPromo(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);
 
     @GET("reviews/")
-    Call<ReviewsContainer> getAllReviews(@Query("api_key") String apiKey, @Query("format") String format, @Query("sort") String sort);
+    Call<ReviewsContainer> getAllReviews(@Query("api_key") String apiKey, @Query("format") String format, @Query("sort") String sort, @Query("limit") int limit);
 
     @GET("review/{id}/")
     Call<ReviewsContainer> getReview(@Path("id") int id, @Query("api_key") String apiKey, @Query("format") String format);

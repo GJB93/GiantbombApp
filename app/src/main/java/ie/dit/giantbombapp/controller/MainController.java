@@ -29,12 +29,14 @@ import retrofit2.Response;
 public class MainController
 {
     private static final String TAG = "MainController";
+    private int totalPromoResults;
     private ApiManager mApi = new ApiManager();
     private DatabaseManager db;
     private Context ctx;
     private String apiKey, format, sort;
     private ConnectivityManager connManager;
     private NetworkInfo networkInfo;
+    private int initialLimit;
 
     public MainController(Context ctx, String apiKey, String format, String sort)
     {
@@ -44,6 +46,7 @@ public class MainController
         this.sort = sort;
         db = new DatabaseManager(ctx);
         db.open();
+        initialLimit = 10;
         connManager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
@@ -73,7 +76,7 @@ public class MainController
         if(networkInfo != null && networkInfo.isConnected())
         {
             db.wipeReviews();
-            Call<ReviewsContainer> call = mApi.getApi().getAllReviews(apiKey, format, sort);
+            Call<ReviewsContainer> call = mApi.getApi().getAllReviews(apiKey, format, sort, initialLimit);
             ReviewsContainer container;
             try
             {
@@ -99,13 +102,44 @@ public class MainController
         }
     }
 
-    public void getPromoData()
+    public void getInitialPromoData()
     {
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected())
         {
             db.wipePromos();
-            Call<PromosContainer> call = mApi.getApi().getAllPromos(apiKey, format);
+            Call<PromosContainer> call = mApi.getApi().getInitialPromos(apiKey, format, initialLimit);
+            PromosContainer container;
+            try
+            {
+                container = call.execute().body();
+                totalPromoResults = container.getNumberOfTotalResults();
+                List<Promo> results = container.getResults();
+
+                for (Promo result : results)
+                {
+
+                    long dbInsert = db.insertPromo(result);
+
+                    if (dbInsert < 0)
+                    {
+                        Log.d(TAG, "There was an error when inserting the promo data into the database");
+                    }
+                }
+
+            } catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+        }
+    }
+
+    public void getMorePromoData(int limit, int offset)
+    {
+        networkInfo = connManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected())
+        {
+            Call<PromosContainer> call = mApi.getApi().getMorePromos(apiKey, format, limit, offset);
             PromosContainer container;
             try
             {
@@ -127,6 +161,12 @@ public class MainController
             {
                 Log.d(TAG, "IOException when attempting to execute API call");
             }
+            Log.d(TAG, "Extra promo data added to database");
         }
+    }
+
+    public int getTotalPromoResults()
+    {
+        return totalPromoResults;
     }
 }

@@ -30,6 +30,7 @@ class PromoDeserialiser implements JsonDeserializer<PromosContainer>
         throws JsonParseException
     {
         PromosContainer promosContainer = new PromosContainer();
+        promosContainer.setNumberOfTotalResults(je.getAsJsonObject().get("number_of_total_results").getAsInt());
         if(je.getAsJsonObject().get("results").isJsonArray())
         {
             Log.d(TAG, "JsonElement is an array");
