@@ -2,14 +2,13 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.dit.giantbombapp.view.PromoActivity">
+    tools:context="ie.dit.giantbombapp.view.activities.PromoActivity">
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         >
 
         <include
@@ -18,6 +17,7 @@
 
         <ImageView
             android:id="@+id/header_image"
+            android:contentDescription="@string/header_image"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:minWidth="200dp"
             android:maxWidth="200dp"

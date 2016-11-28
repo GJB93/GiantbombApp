@@ -10,7 +10,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Graham on 14-Nov-16.
+ * Author: Graham Byrne
+ *
+ * Created: 14/11/2016
+ * Modified: 25/11/2016
+ *
+ * This class is used to create a Retrofit instance. The base url for the API
+ * is supplied, along with a Gson library that is used to parse the incoming
+ * JSON responses. The deserialisers in this case are custom deserialisers that
+ * parse JSON to each specified class in a specific way.
+ *
+ * The Retrofit instance is also created as a singleton instance, so only one
+ * Retrofit instance can exist at any one time.
  */
 
 public class ApiManager {

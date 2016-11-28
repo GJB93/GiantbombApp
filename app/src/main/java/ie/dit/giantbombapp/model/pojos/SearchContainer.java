@@ -5,14 +5,23 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by graha on 24/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 24/11/2016
+ * Modified: 25/11/2016
+ *
+ * POJO for retrieving each Search object in the results JSON array given
+ * by the Giantbomb API
+ *
+ * SerialisedName annotation is used to specify the JSON form of the variable
+ * name
  */
 
 public class SearchContainer
 {
     @SerializedName("number_of_total_results")
-    int numberOfTotalResults;
-    List<Search> results;
+    private int numberOfTotalResults;
+    private List<Search> results;
 
     public List<Search> getResults()
     {

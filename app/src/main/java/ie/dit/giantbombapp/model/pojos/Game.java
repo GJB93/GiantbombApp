@@ -3,7 +3,15 @@ package ie.dit.giantbombapp.model.pojos;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by graha on 22/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 22/11/2016
+ * Modified: 25/11/2016
+ *
+ * POJO for the Game JSON object found on the Giantbomb API
+ *
+ * SerialisedName annotation is used to specify the JSON form of the variable
+ * name
  */
 
 public class Game

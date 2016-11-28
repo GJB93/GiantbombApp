@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/to_reviews"
-          android:title="Reviews"
+          android:title="@string/reviews"
           android:orderInCategory="100"
           app:showAsAction="never"/>
 
-    <item android:id="@+id/to_wiki"
-          android:title="Wiki"
+    <item android:id="@+id/to_search"
+          android:title="@string/search"
           android:orderInCategory="200"
           app:showAsAction="never"/>
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
-          android:title="Settings"
+          android:title="@string/settings"
           android:orderInCategory="300"
           app:showAsAction="never"/>
 

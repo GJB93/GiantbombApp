@@ -11,9 +11,17 @@ import ie.dit.giantbombapp.model.pojos.Promo;
 import ie.dit.giantbombapp.model.pojos.Review;
 
 /**
- * Created by Graham on 17-Nov-16.
+ * Author: Graham Byrne
+ *
+ * Created: 17/11/2016
+ * Modified: 25/11/2016
+ *
+ * This class controls the SQLLiteDatabase. It has methods to query, delete,
+ * update and insert to each table. It also contains a DatabaseHelper class
+ * that creates the database on the phone
  */
 
+//Reference: The following code is heavily based on the Database code we were given in class
 public class DatabaseManager {
 
     private static final String PROMO_TABLE 	    = "Promo";
@@ -70,18 +78,13 @@ public class DatabaseManager {
 
     private static final String DATABASE_NAME 	= "Giantbomb";
     private static final int DATABASE_VERSION 	= 10;
-    private static final String DATABASE_CREATE =
-            PROMO_CREATE + REVIEW_CREATE;
-    private final Context context;
-    private DatabaseHelper DBHelper;
+    private final DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
     //
     public DatabaseManager(Context ctx)
     {
-        //
-        this.context 	= ctx;
-        DBHelper 		= new DatabaseHelper(context);
+        DBHelper 		= new DatabaseHelper(ctx);
     }
 
 

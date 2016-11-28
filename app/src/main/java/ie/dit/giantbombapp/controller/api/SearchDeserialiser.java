@@ -18,7 +18,13 @@ import ie.dit.giantbombapp.model.pojos.Search;
 import ie.dit.giantbombapp.model.pojos.SearchContainer;
 
 /**
- * Created by graha on 16/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 16/11/2016
+ * Modified: 25/11/2016
+ *
+ * See the PromoDeserialiser description for an explanation for this
+ * deserialiser
  */
 
 class SearchDeserialiser implements JsonDeserializer<SearchContainer>
@@ -42,7 +48,6 @@ class SearchDeserialiser implements JsonDeserializer<SearchContainer>
                 JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
                 Search search = new Gson().fromJson(jsonObject, Search.class);
                 results.add(search);
-                Log.d(TAG, results.get(i).getDeck());
             }
 
             searchContainer.setResults(results);

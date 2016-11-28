@@ -5,14 +5,23 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by graha on 22/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 22/11/2016
+ * Modified: 25/11/2016
+ *
+ * POJO for retrieving each Review object in the results JSON array given
+ * by the Giantbomb API
+ *
+ * SerialisedName annotation is used to specify the JSON form of the variable
+ * name
  */
 
 public class ReviewsContainer
 {
     @SerializedName("number_of_total_results")
-    int numberOfTotalResults;
-    List<Review> results;
+    private int numberOfTotalResults;
+    private List<Review> results;
 
     public List<Review> getResults()
     {

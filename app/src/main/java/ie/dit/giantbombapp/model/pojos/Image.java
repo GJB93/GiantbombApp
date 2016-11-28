@@ -3,7 +3,15 @@ package ie.dit.giantbombapp.model.pojos;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Graham on 15-Nov-16.
+ * Author: Graham Byrne
+ *
+ * Created:15/11/2016
+ * Modified: 25/11/2016
+ *
+ * POJO for the Image JSON object found on the Giantbomb API
+ *
+ * SerialisedName annotation is used to specify the JSON form of the variable
+ * name
  */
 
 public class Image

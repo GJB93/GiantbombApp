@@ -10,12 +10,13 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import ie.dit.giantbombapp.R;
 
 /**
- * Created by Graham on 27-Oct-16.
+ * Author: Graham Byrne
+ *
+ * Created: 23/11/2016
+ * Modified: 25/11/2016
  */
 
 public class PromoCursorAdapter extends CursorAdapter {
@@ -41,12 +42,15 @@ public class PromoCursorAdapter extends CursorAdapter {
         ImageView promoType = (ImageView) v.findViewById(R.id.promo_type);
 
         String title = "" + c.getString(c.getColumnIndexOrThrow("promo_title"));
-        String author = "" +  c.getString(c.getColumnIndexOrThrow("author"));
+        String author = c.getString(c.getColumnIndexOrThrow("author"));
         String date = "" + c.getString(c.getColumnIndexOrThrow("date_added"));
         String type = "" + c.getString(c.getColumnIndexOrThrow("resource_type"));
 
         promoTitle.setText(title);
-        promoAuthor.setText(author);
+        if (author != null)
+            promoAuthor.setText(author);
+        else
+            promoAuthor.setVisibility(View.GONE);
         promoDate.setText(date);
 
         if("video".equals(type))

@@ -5,7 +5,7 @@
     android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.dit.giantbombapp.view.ReviewListActivity">
+    tools:context="ie.dit.giantbombapp.view.activities.ReviewListActivity">
 
     <include
         android:id="@+id/my_toolbar"
@@ -17,6 +17,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/my_toolbar"
-        android:id="@+id/review_list"/>
+        android:id="@+id/review_list"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_indicator"
+        android:layout_below="@id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/data_error"
+        android:layout_below="@id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data_message"/>
+    </RelativeLayout>
 
 </RelativeLayout>

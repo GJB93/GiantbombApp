@@ -4,11 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import ie.dit.giantbombapp.controller.api.ApiManager;
@@ -21,11 +19,15 @@ import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
 import ie.dit.giantbombapp.model.pojos.Search;
 import ie.dit.giantbombapp.model.pojos.SearchContainer;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
- * Created by graha on 15/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 15/11/2016
+ * Modified: 25/11/2016
+ *
+ * This is the primary controller for the activities. It links each activity to the
+ * SQLiteDatabase, as well as giving them a way to query the API
  */
 
 public class MainController
@@ -33,17 +35,22 @@ public class MainController
     private static final String TAG = "MainController";
     private int totalPromoResults;
     private int totalReviewResults;
-    private ApiManager mApi = new ApiManager();
-    private DatabaseManager db;
-    private Context ctx;
-    private String apiKey, format, sort;
-    private ConnectivityManager connManager;
+    private final ApiManager mApi = new ApiManager();
+    private final DatabaseManager db;
+    private final String apiKey, format, sort;
+    private final ConnectivityManager connManager;
     private NetworkInfo networkInfo;
-    private int initialLimit;
+    private final int initialLimit;
 
+    /**
+     * Main constructor for MainController
+     * @param ctx: Context, needed for creating the database
+     * @param apiKey: API Key to use to verify each API call
+     * @param format: Format by which to retrieve each API call
+     * @param sort: The sorting type to use when querying the Reviews resource
+     */
     public MainController(Context ctx, String apiKey, String format, String sort)
     {
-        this.ctx = ctx;
         this.apiKey = apiKey;
         this.format = format;
         this.sort = sort;
@@ -63,17 +70,34 @@ public class MainController
         db.open();
     }
 
-
+    /**
+     * Fetch a single review from the database using a given Game Id
+     * **/
     public Cursor fetchReview(int id)
     {
         return db.getReviewByGameId(id);
     }
 
+    /**
+     * Fetch every review in the database
+     * **/
     public Cursor fetchAllReviews()
     {
         return db.getAllReviews();
     }
 
+    /**
+     * If the network is available and connected, this method gets the initial
+     * number of Review objects given an initial limit, and enters each Review into
+     * the local SQLLiteDatabase.
+     *
+     * It will also wipe the database each time it is called. This is to reduce the
+     * amount of space the app takes up on the phone, as it is called each time the
+     * app is launched.
+     *
+     * It uses a synchronised Retrofit call, so this method needs to be run off the
+     * main UI thread
+     */
     public void getInitialReviewData()
     {
         networkInfo = connManager.getActiveNetworkInfo();
@@ -81,10 +105,18 @@ public class MainController
         {
             db.wipeReviews();
             Call<ReviewsContainer> call = mApi.getApi().getInitialReviews(apiKey, format, sort, initialLimit);
-            ReviewsContainer container;
+            ReviewsContainer container = null;
             try
             {
                 container = call.execute().body();
+            }
+            catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+
+            if(container != null)
+            {
                 List<Review> results = container.getResults();
                 totalReviewResults = container.getNumberOfTotalResults();
                 for (Review result : results)
@@ -97,25 +129,36 @@ public class MainController
                         Log.d(TAG, "There was an error when inserting the promo data into the database");
                     }
                 }
-
-            } catch (IOException e)
-            {
-                Log.d(TAG, "IOException when attempting to execute API call");
+                Log.d(TAG, "Entered initial Review data to database");
             }
-            Log.d(TAG, "Entered Review Data to Database");
         }
     }
 
+    /**
+     * This method is identical to the GetInitialReviews() method, except it returns each Review found
+     * after a given offset, and within the limit specified.
+     *
+     * @param limit: Number of review items to retrieve
+     * @param offset: Offset from which to search the API
+     */
     public void getMoreReviewData(int limit, int offset)
     {
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected())
         {
             Call<ReviewsContainer> call = mApi.getApi().getMoreReviews(apiKey, format, sort, limit, offset);
-            ReviewsContainer container;
+            ReviewsContainer container = null;
             try
             {
                 container = call.execute().body();
+            }
+            catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+
+            if(container != null)
+            {
                 List<Review> results = container.getResults();
 
                 for (Review result : results)
@@ -129,11 +172,8 @@ public class MainController
                     }
                 }
 
-            } catch (IOException e)
-            {
-                Log.d(TAG, "IOException when attempting to execute API call");
+                Log.d(TAG, "Extra Review data entered to database");
             }
-            Log.d(TAG, "Extra Review Data to Database");
         }
     }
 
@@ -142,16 +182,25 @@ public class MainController
         return totalReviewResults;
     }
 
+    /**
+     * See fetchReview()
+     */
     public Cursor fetchPromo(int id)
     {
         return db.getPromoByPromoId(id);
     }
 
+    /**
+     * See fetchAllReviews()
+     */
     public Cursor fetchAllPromos()
     {
         return db.getAllPromos();
     }
 
+    /**
+     * See getInitialReviewData()
+     */
     public void getInitialPromoData()
     {
         networkInfo = connManager.getActiveNetworkInfo();
@@ -159,11 +208,19 @@ public class MainController
         {
             db.wipePromos();
             Call<PromosContainer> call = mApi.getApi().getInitialPromos(apiKey, format, initialLimit);
-            PromosContainer container;
+            PromosContainer container = null;
             try
             {
                 container = call.execute().body();
+            } catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+
+            if(container != null)
+            {
                 totalPromoResults = container.getNumberOfTotalResults();
+
                 List<Promo> results = container.getResults();
 
                 for (Promo result : results)
@@ -176,24 +233,31 @@ public class MainController
                         Log.d(TAG, "There was an error when inserting the promo data into the database");
                     }
                 }
-
-            } catch (IOException e)
-            {
-                Log.d(TAG, "IOException when attempting to execute API call");
+                Log.d(TAG, "Initial Promo data entered to database");
             }
         }
     }
 
+    /**
+     * See getMoreReviewData()
+     */
     public void getMorePromoData(int limit, int offset)
     {
         networkInfo = connManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected())
         {
             Call<PromosContainer> call = mApi.getApi().getMorePromos(apiKey, format, limit, offset);
-            PromosContainer container;
+            PromosContainer container = null;
             try
             {
                 container = call.execute().body();
+            } catch (IOException e)
+            {
+                Log.d(TAG, "IOException when attempting to execute API call");
+            }
+
+            if(container != null)
+            {
                 List<Promo> results = container.getResults();
 
                 for (Promo result : results)
@@ -206,12 +270,8 @@ public class MainController
                         Log.d(TAG, "There was an error when inserting the promo data into the database");
                     }
                 }
-
-            } catch (IOException e)
-            {
-                Log.d(TAG, "IOException when attempting to execute API call");
+                Log.d(TAG, "Extra Promo data added to database");
             }
-            Log.d(TAG, "Extra promo data added to database");
         }
     }
 
@@ -220,6 +280,17 @@ public class MainController
         return totalPromoResults;
     }
 
+    /**
+     * This method is slightly different from the Review and Promo methods in that
+     * it returns a list of Search objects instead of a Cursor. I think it would be
+     * overkill to create a database table to hold every search result found for the
+     * given query and resource
+     *
+     * @param query: The query for which to search
+     * @param resource: The resource within which to search for the given query above
+     *
+     * @return: A list of Search objects
+     */
     public List<Search> searchForData(String query, String resource)
     {
         networkInfo = connManager.getActiveNetworkInfo();
@@ -233,11 +304,14 @@ public class MainController
             try
             {
                 container = call.execute().body();
-                return container.getResults();
-
             } catch (IOException e)
             {
                 return null;
+            }
+
+            if(container != null)
+            {
+                return container.getResults();
             }
         }
 

@@ -12,7 +12,10 @@ import android.widget.TextView;
 import ie.dit.giantbombapp.R;
 
 /**
- * Created by graha on 23/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 23/11/2016
+ * Modified: 25/11/2016
  */
 
 public class ReviewCursorAdapter extends CursorAdapter

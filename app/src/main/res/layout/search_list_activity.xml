@@ -5,38 +5,91 @@
     android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.dit.giantbombapp.view.SearchListActivity">
+    tools:context="ie.dit.giantbombapp.view.activities.SearchListActivity">
 
     <include
         android:id="@+id/my_toolbar"
         layout="@layout/app_bar"/>
 
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/search_details"
         android:layout_below="@id/my_toolbar"
-        android:hint="Search wiki...."/>
-
-    <Spinner
-        android:id="@+id/resource_spinner"
-        android:layout_below="@id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_wiki"/>
 
-    <Button
-        android:id="@+id/search_button"
-        android:layout_below="@id/resource_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search"/>
+        <Spinner
+            android:id="@+id/resource_spinner"
+            android:layout_below="@id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_below="@id/resource_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search"/>
+    </RelativeLayout>
 
     <ListView
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_button"
-        android:id="@+id/search_list"/>
+        android:layout_below="@id/search_details"
+        android:id="@+id/search_list"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_indicator"
+        android:layout_below="@id/search_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/data_error"
+        android:layout_below="@id/search_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data_message"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/no_search_data"
+        android:layout_below="@id/search_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_search_data"/>
+    </RelativeLayout>
 
 </RelativeLayout>

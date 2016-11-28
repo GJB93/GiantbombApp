@@ -3,246 +3,219 @@
 
     <item
         is-multidex="true"
-        jar="G:\Android\AppdataCrap\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_83b9137a195adec720fe4bfece09577ec89105be\classes.dex" />
+        revision="24.0.3"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_3c12a181ab039b2757f5b0629694a283ee317d27\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\org.glassfish\javax.annotation\10.0-b28\30eb3b3cc9cb0863a4edaea5a7575f8ace1b96ba\javax.annotation-10.0-b28.jar"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="30eb3b3cc9cb0863a4edaea5a7575f8ace1b96ba">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\javax.annotation-10.0-b28_a859d9f7487b765990409ad9907bdd0e6901bbf5\classes.dex" />
+        revision="24.0.3"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.0_1c9eeb6844a5da36d004d3ab97e163f1ec020451\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_92a9024509038d4a6554b1051591dc2e75c85324\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_5e2334b69af4453b65d9acdc1c15038aacebc2a8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_9da468cf44d3a1a25bdf7e08d3201380d9c10abb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_35fa83e776e303b6fcfadfa3c50f65074a97e816\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="78ac873d545779e6c3ae3a7ac59ea89037dc0232">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d43a50227955a70b4bd2acaed81d38275da88ca9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_333979f5b204ad6b7856723c1ec80a9d3c0ead9b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_53d0d85c6b466850c374a67db795ce751164869c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_03f2f0bf0981cab384d52e98ba8566472e01d6fd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_10430b61e1ae45ae1978be2a643de99a6c590fd8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_eb945b6a1d802d698bbf91317ca207c74d03db2a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_5272e080d83c99aeb420f66b621105563d0db821\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_54efe034b6888e88b1696fa7802979cd26173539\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_ee7eac360e65c6448c94967459fc8c126e7eedcb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_f27c571421e0ff54a0a66051a209fc301299dd96\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_6d476c8e5854824f3bf3f701b2ff9ec8499f30be\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
+        revision="24.0.3"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_214076b09426caac77f0aa169103a62a04c25d38\classes.dex" />
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_bfcd98ba6264cf86212e7a69601e9f346c42c439\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.0\2b802460eea20f8f2ad9c08c74e0f14718e88aa9\okhttp-3.3.0.jar"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
+        revision="24.0.3"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_101f064e680079736a9f224c8e5289c8d0e75dc5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_4ec5f8bba62dfc230f00c77cbc437bb4bb320e82\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_02230beee97096b7d885fa2466aadaba6d964d63\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.0_c3a7fe369b53447277c62487325627b22db7f4c0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.0\2b802460eea20f8f2ad9c08c74e0f14718e88aa9\okhttp-3.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
         sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.0_9347b5e1b63b0b6737b8a856452055dc46736f75\classes.dex" />
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.0_aa1ad8056b90e78682e4c26c89660f7f05d1e446\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
+        revision="24.0.3"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_9336fd851f6c70582980d0c43edcabba64bdf06a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.0_7c7bef8323ad1bae349b4ba39a762bb29604eb49\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.0_f90f18f9089ab56c50992a2757b08ea75bdc62dd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\org.glassfish\javax.annotation\10.0-b28\30eb3b3cc9cb0863a4edaea5a7575f8ace1b96ba\javax.annotation-10.0-b28.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="30eb3b3cc9cb0863a4edaea5a7575f8ace1b96ba">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\javax.annotation-10.0-b28_73319c286adf243b0aaff043a7b94ff7c7a6f3ba\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.0_ab191cfc1f1c5d99cc908710d6461b10abf70a4d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.0_f1cab26b530b036835b917588fc43e0b17daca35\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.0_63fcf86784c3b3ee3753f77b103a8526c4311c43\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_d3fd7ce666accc0d0782a7202572771d37ed0de1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.0_0a342828dde5ba3e436fa94c00a27fcbca461eca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_f899ae2d4b1fa0a50d8a91d57c66c2edef63f12a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
         sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_8ff50d4c326311962c610989fcb7275be441312a\classes.dex" />
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_f6b0bcff4aebf4660e42d30128f0df0ca81cb74a\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_4f04943feb95cee35a9c80daf56b1621d853dbf1\classes.dex" />
+        revision="24.0.3"
+        sha1="973042789c24735fb0790fca29a9051ebb67c1b1">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_2bbb37e2a8fb50d50d4414af59ff2a33f6bee9bc\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_ca1954b7d1e2c2912f678e119390cb2e9c617734\classes.dex" />
+        revision="24.0.3"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.0_36dc124c9bd9816eb2d73288ec886910cf741187\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jar="C:\Users\Graham\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_dfcbf5d4674fb815f9483a577d24b1a9991d8b48\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\graha\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
+        revision="24.0.3"
         sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_565a729929d555607f481830c8b5b63d658af520\classes.dex" />
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_536895bf56aadef59fff6a5b6ed21adc1e80d029\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jar="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_a1b6c1fa4092180007ad987cbbc18261359a8621\classes.dex" />
+        revision="24.0.3"
+        sha1="005ce436676f6397084b7076b85070e3dee33f70">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_48364c494268c65c1df1056782a637397f1e220a\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="C:\Users\Graham\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.0\support-annotations-25.0.0.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_e6e479c69744abbdf3b3e5154985df9a597c511a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="83a37c2f3043b7bc40548ccec42fd2bf48a2169b">
-        <dex dex="G:\Android\AndroidApps\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_84f6306eececef2ab3e175c416bc6541985e7c60\classes.dex" />
+        revision="24.0.3"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="C:\Users\Graham\AndroidStudioProjects\GiantbombApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.0_978f25d1a092149a4ec4bfb3845eb05f281d86fc\classes.dex" />
     </item>
 
 </items>

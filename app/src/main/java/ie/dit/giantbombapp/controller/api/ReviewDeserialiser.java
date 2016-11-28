@@ -18,7 +18,13 @@ import ie.dit.giantbombapp.model.pojos.Review;
 import ie.dit.giantbombapp.model.pojos.ReviewsContainer;
 
 /**
- * Created by graha on 16/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 16/11/2016
+ * Modified: 25/11/2016
+ *
+ * See the PromoDeserialiser description for an explanation for this
+ * deserialiser
  */
 
 class ReviewDeserialiser implements JsonDeserializer<ReviewsContainer>

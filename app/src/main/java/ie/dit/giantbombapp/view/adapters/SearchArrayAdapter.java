@@ -1,6 +1,8 @@
 package ie.dit.giantbombapp.view.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +19,17 @@ import ie.dit.giantbombapp.R;
 import ie.dit.giantbombapp.model.pojos.Search;
 
 /**
- * Created by graha on 24/11/2016.
+ * Author: Graham Byrne
+ *
+ * Created: 24/11/2016
+ * Modified: 25/11/2016
  */
 
 public class SearchArrayAdapter extends ArrayAdapter<Search>
 {
-    Context ctx;
-    List<Search> mData;
-    int resource;
+    private static final String TAG = "SearchArrayAdapter";
+    private final Context ctx;
+    private List<Search> mData;
 
     public SearchArrayAdapter(Context context, int resource, List<Search> objects)
     {
@@ -32,8 +37,8 @@ public class SearchArrayAdapter extends ArrayAdapter<Search>
         mData = new ArrayList<>();
         mData = objects;
         this.ctx = context;
-        this.resource = resource;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
@@ -52,10 +57,15 @@ public class SearchArrayAdapter extends ArrayAdapter<Search>
 
         String searchName = mData.get(position).getName();
         String searchDeck = mData.get(position).getDeck();
-        String searchThumb = mData.get(position).getImage().getThumbUrl();
+        String searchThumb = null;
 
-        Picasso.with(ctx).load(searchThumb).into(thumbnail);
-        name.setText(mData.get(position).getName());
+        if(mData.get(position).getImage() != null)
+            searchThumb = mData.get(position).getImage().getThumbUrl();
+
+
+        if(searchThumb != null)
+            Picasso.with(ctx).load(searchThumb).into(thumbnail);
+        name.setText(searchName);
         deck.setText(searchDeck);
         return row;
 

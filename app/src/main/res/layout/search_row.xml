@@ -7,24 +7,28 @@
 
     <ImageView
         android:id="@+id/search_thumbnail"
-        android:contentDescription="Thumbnail"
+        android:contentDescription="@string/thumbnail"
         android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
         android:layout_width="@dimen/thumbnail_dim"
         android:layout_height="@dimen/thumbnail_dim"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/search_name"
         android:layout_toRightOf="@id/search_thumbnail"
-        android:text="Title"
+        android:layout_toEndOf="@id/search_thumbnail"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/search_deck"
-        android:text="Author"
         android:layout_toRightOf="@id/search_thumbnail"
+        android:layout_toEndOf="@id/search_thumbnail"
         android:layout_below="@id/search_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
